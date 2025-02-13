@@ -67,10 +67,10 @@
 								<span class="role"> 
 									@if (Auth::user()->hasRole('admin'))
 										Administrador
-									@elseif(Auth::user()->hasRole('camara'))
-										Cámara
+									@elseif(Auth::user()->hasRole('user'))
+										Usuario
 									@else
-										Colaborador
+										Usuario
 									@endif
 								</span>
 							</div> 

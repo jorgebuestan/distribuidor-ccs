@@ -11,20 +11,30 @@ class RolesAndPermissionsSeeder extends Seeder
 {
     public function run(): void
     {
-        // Verificar si el rol admin ya existe
-        $adminRole = Role::where('name', 'admin')->first();
+        // Verificar si los roles ya existen y crearlos si no están
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
+        $userRole = Role::firstOrCreate(['name' => 'user']);
 
-        if (!$adminRole) {
-            $adminRole = Role::create(['name' => 'admin']);
+        // Crear usuario administrador si no existe
+        $adminUser = User::where('email', 'admin@admin.com')->first();
+        if (!$adminUser) {
+            $adminUser = User::create([
+                'name' => 'Administrador',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('admin123'),
+            ]);
+            $adminUser->assignRole($adminRole);
         }
 
-        // Crear usuario y asignar rol
-        $adminUser = User::create([
-            'name' => 'Administrador',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('admin123'),
-        ]);
-
-        $adminUser->assignRole($adminRole); // Asignar el rol admin
+        // Crear usuario normal si no existe
+        $normalUser = User::where('email', 'user@user.com')->first();
+        if (!$normalUser) {
+            $normalUser = User::create([
+                'name' => 'Usuario Normal',
+                'email' => 'user@user.com',
+                'password' => Hash::make('user123'),
+            ]);
+            $normalUser->assignRole($userRole);
+        }
     }
 }
