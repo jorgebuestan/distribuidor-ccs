@@ -22,6 +22,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PaisSeeder::class);   
         $this->call(ProvinciaSeeder::class); 
         $this->call(CantonSeeder::class); 
+        $this->call(TipoDocumentoSeeder::class); 
+        $this->call(TipoSexoSeeder::class); 
+        $this->call(TipoSolicitudSeeder::class); 
+        $this->call(TipoVigenciaSeeder::class); 
         //$this->call(UserSeeder::class);  
     }
 }
