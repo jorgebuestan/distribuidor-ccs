@@ -196,53 +196,91 @@
 
 		<!--  -->
 		<script src="{{ URL::asset('porto/vendor/jquery/jquery.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jquery-browser-mobile/jquery.browser.mobile.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/popper/umd/popper.min.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/common/common.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/nanoscroller/nanoscroller.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/magnific-popup/jquery.magnific-popup.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jquery-placeholder/jquery.placeholder.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jquery-browser-mobile/jquery.browser.mobile.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/popper/umd/popper.min.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.es.min.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/common/common.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/nanoscroller/nanoscroller.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/magnific-popup/jquery.magnific-popup.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jquery-placeholder/jquery.placeholder.js') }}"></script>
 
-		<!-- Specific Page   -->
-		<script src="{{ URL::asset('porto/vendor/jquery-ui/jquery-ui.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jquery-appear/jquery.appear.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/bootstrapv5-multiselect/js/bootstrap-multiselect.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jquery.easy-pie-chart/jquery.easypiechart.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/flot/jquery.flot.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/flot.tooltip/jquery.flot.tooltip.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/flot/jquery.flot.pie.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/flot/jquery.flot.categories.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/flot/jquery.flot.resize.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jquery-sparkline/jquery.sparkline.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/raphael/raphael.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/morris/morris.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/gauge/gauge.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/snap.svg/snap.svg.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/liquid-meter/liquid.meter.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jqvmap/jquery.vmap.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jqvmap/data/jquery.vmap.sampledata.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jqvmap/maps/jquery.vmap.world.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.africa.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.asia.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.australia.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.europe.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.north-america.js') }}"></script>
-		<script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js') }}"></script>
+    <!-- Specific Page Vendor -->
+    <script src="{{ URL::asset('porto/vendor/jquery-ui/jquery-ui.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jquery-appear/jquery.appear.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/bootstrapv5-multiselect/js/bootstrap-multiselect.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jquery.easy-pie-chart/jquery.easypiechart.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/flot/jquery.flot.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/flot.tooltip/jquery.flot.tooltip.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/flot/jquery.flot.pie.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/flot/jquery.flot.categories.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/flot/jquery.flot.resize.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jquery-sparkline/jquery.sparkline.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/raphael/raphael.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/morris/morris.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/gauge/gauge.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/snap.svg/snap.svg.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/liquid-meter/liquid.meter.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jqvmap/jquery.vmap.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jqvmap/data/jquery.vmap.sampledata.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jqvmap/maps/jquery.vmap.world.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.africa.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.asia.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.australia.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.europe.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.north-america.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js') }}"></script>
 
-		<!-- Theme Base, Components and Settings -->
-		<script src="{{ URL::asset('porto/js/theme.js') }}"></script>
 
-		<!-- Theme Custom -->
-		<script src="{{ URL::asset('porto/js/custom.js') }}"></script>
+    <!-- Specific Page Vendor -->
+    <script src="{{ URL::asset('porto/vendor/select2/js/select2.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/pnotify/pnotify.custom.js') }}"></script>
 
-		<!-- Theme Initialization Files -->
-		<script src="{{ URL::asset('porto/js/theme.init.js') }}"></script>
+    <!-- Specific Page Vendor -->
+    <script src="{{ URL::asset('porto/vendor/jquery-validation/jquery.validate.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/bootstrapv5-wizard/jquery.bootstrap.wizard.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/pnotify/pnotify.custom.js') }}"></script>
 
-		<!-- Examples -->
-		<script src="{{ URL::asset('porto/js/examples/examples.dashboard.js') }}"></script>
+    <!-- Specific Page Vendor -->
+    <script src="{{ URL::asset('porto/vendor/select2/js/select2.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/datatables/media/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/datatables/extras/TableTools/Buttons-1.4.2/js/dataTables.buttons.min.js') }}">
+    </script>
+    <script src="{{ URL::asset('porto/vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.bootstrap4.min.js') }}">
+    </script>
+    <script src="{{ URL::asset('porto/vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.html5.min.js') }}">
+    </script>
+    <script src="{{ URL::asset('porto/vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js') }}">
+    </script>
+    <script src="{{ URL::asset('porto/vendor/datatables/extras/TableTools/JSZip-2.5.0/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('porto/vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js') }}"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="{{ URL::asset('porto/js/theme.js') }}"></script>
+
+    <!-- Theme Custom -->
+    <script src="{{ URL::asset('porto/js/custom.js') }}"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="{{ URL::asset('porto/js/theme.init.js') }}"></script>
+
+    <!-- Examples -->
+    <script src="{{ URL::asset('porto/js/examples/examples.dashboard.js') }}"></script>
+
+    <!-- Examples -->
+    <script src="{{ URL::asset('porto/js/examples/examples.modals.js') }}"></script>
+
+    <!-- Examples -->
+    <script src="{{ URL::asset('porto/js/examples/examples.wizard.js') }}"></script>
+
+
+    <script src="{{ URL::asset('porto/js/examples/examples.datatables.default.js') }}"></script>
+    <script src="{{ URL::asset('porto/js/examples/examples.datatables.row.with.details.js') }}"></script>
+    <script src="{{ URL::asset('porto/js/examples/examples.datatables.tabletools.js') }}"></script>
 
 	</body>
 </html>
