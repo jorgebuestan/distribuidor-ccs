@@ -113,7 +113,7 @@
             <div class="col-lg-12">
                 <section class="card" id="w3">
                     <header class="card-header">
-                        <h2 class="card-title">Gestión de Cámaras</h2>
+                        <h2 class="card-title">Registro de Empresas</h2>
                     </header>
                     <div class="card-body">
                         <div class="row">
@@ -121,33 +121,11 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button class="btn btn-primary mb-3" data-toggle="modal"
-                                            data-target="#ModalCamara">Agregar Nuevo Registro</button>
-                                            <!--<span class="badge bg-success text-light">ACTIVO</span>
-                                            <span class="badge bg-danger text-light">INACTIVO</span>-->
+                                            data-target="#ModalCamara">Agregar Nuevo Registro</button> 
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <!-- <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#ModalEstablecimiento">Agregar Nuevo Registro</button> -->
-                                        <!-- <button id="abrirModal" class="btn btn-primary mb-3">Agregar Nuevo Socio</button>-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1 d-flex align-items-end">
-                                Estado
-                            </div>
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <select id="estado_camara" name="estado_camara" class="form-control populate">  
-                                        <option value=1>Todos</option> 
-                                        <option value=2>Afiliados</option> 
-                                        <option value=3>Desafiliados</option> 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
+                            </div> 
+                            <div class="col-md-6">
                                 &nbsp;
                             </div>
                         </div>
@@ -160,38 +138,28 @@
                             <div class="col">
                                 <section class="card">
                                     <header class="card-header">
-                                        <h2 class="card-title">Listado de Cámaras Registradas</h2>
+                                        <h2 class="card-title">Listado de Firmas Registradas</h2>
                                     </header>
                                     <div class="card-body overflow-x-auto max-w-full">
                                         <table class="table table-bordered table-striped mb-0" id="dataTable">
                                             <thead>
                                                 <tr>
-                                                    <th>FECHA DE INGRESO</th>
-                                                    <th>RUC</th>
-                                                    <th>RAZÓN SOCIAL</th>
-                                                    <th>REPRESENTANTE LEGAL</th>
-                                                    <th>CÉDULA REP. LEGAL</th>
-                                                    <!-- <th>Estado</th> --> 
-                                                    <th>FECHA DESAFILIACIÓN</th>
-                                                    <th>MOTIVO DESAFILIACIÓN</th>
-                                                    <th>ACCIONES</th>
+                                                    <th>ID</th>
+                                                    <th>TIPO SOLICITUD</th>
+                                                    <th>TIPO DOCUMENTO</th>
+                                                    <th>NÚMERO DOCUMENTO</th>
+                                                    <th>NOMBRES</th> 
+                                                    <th>APELLIDO PATERNO</th>
+                                                    <th>APELLIDO MATERNO</th>
+                                                    <th>TELÉFONO</th>
+                                                    <th>EMAIL</th>
                                                 </tr>
                                             </thead>
                                         </table>
                                     </div>
                                 </section>
                             </div>
-                        </div>
-                        <!-- <div class="row">
-                            <div class="col"> 
-                                <div id="image-container">
-                                    <a href="{{ asset('storage/logos/0922489968001/0922489968001.png') }}" data-lightbox="example" target="_blank">
-                                        <img src="{{ asset('storage/logos/0922489968001/0922489968001.png') }}" alt="Imagen reducida" style="max-width: 100%; height: auto;">
-                                         
-                                    </a>
-                                </div>
-                            </div>
-                        </div> -->
+                        </div> 
                     </div>
             </div>
             </section>
@@ -199,8 +167,7 @@
     </div>
     </div>
     <div class="container">
-        <!-- Modal -->
-
+        <!-- Modal --> 
         <!-- Jbuestan Modales -->
         <form enctype="multipart/form-data" class="modal fade" id="ModalCamara" tabindex="-1"
             aria-labelledby="ModalCamaraLabel" aria-hidden="true">
@@ -219,98 +186,333 @@
                                             <li class="nav-item active">
                                                 <a class="nav-link" data-bs-target="#datos_generales"
                                                     href="#datos_generales" data-bs-toggle="tab">Datos Generales</a>
-                                            </li> 
+                                            </li>  
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-target="#documentos"
+                                                    href="#documentos" data-bs-toggle="tab">Documentos</a>
+                                            </li>
                                         </ul>
                                         <div class="tab-content">
                                             <div id="datos_generales" class="tab-pane active">
                                                 <div class="row mb-2">
-                                                    <div class="col-md-6 gap-1">
-                                                        <label>Fecha de Ingreso</label>
-                                                        <input type="text" data-plugin-datepicker class="form-control"
-                                                            name="fecha_ingreso" id="fecha_ingreso"
-                                                            placeholder="Fecha de Ingreso">
-                                                    </div>
-                                                    <div class="col-md-6 gap-1">
-                                                        <label>RUC</label>
-                                                        <input type="text" class="form-control" name="ruc"
-                                                            id="ruc" placeholder="RUC de la Cámara">
-                                                        <div id="error-ruc" style="color: red; display: none;">El RUC debe
-                                                            tener
-                                                            13 dígitos.</div>
-                                                    </div>
+                                                    <div class="col-md-12 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="tipo_solicitud" class="form-label">Tipo de Solicitud</label>
+                                                            <select id="tipo_solicitud" name="tipo_solicitud" class="form-control populate">
+                                                                <option value="-1">Seleccionar</option>
+                                                                @foreach ($tiposSolicitud as $id => $entidad)
+                                                                    <option value="{{ $id }}">{{ $entidad }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div> 
                                                 </div>
                                                 <div class="row mb-2">
-                                                    <div class="col-md-6 gap-1">
-                                                        <label>Razón Social</label>
-                                                        <input type="text" class="form-control" name="razon_social"
-                                                            id="razon_social" placeholder="Razón Social">
-                                                    </div>
-                                                    <div class="col-md-6 gap-1">
-                                                        <label>Cédula Representante Legal</label>
-                                                        <input type="text" class="form-control"
-                                                            name="cedula_representante_legal"
-                                                            id="cedula_representante_legal"
-                                                            placeholder="Cédula Representante Legal">
-                                                        <div id="error-cedula" style="color: red; display: none;">La
-                                                            Cédula debe tener 10 dígitos.</div>
-                                                    </div>
-                                                </div>
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="tipo_documento" class="form-label">Tipo de Documento</label>
+                                                            <select id="tipo_documento" name="tipo_documento" class="form-control populate">
+                                                                <option value="-1">Seleccionar</option>
+                                                                @foreach ($tiposDocumento as $id => $entidad)
+                                                                    <option value="{{ $id }}">{{ $entidad }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="numero_documento" class="form-label">Número de Documento</label>
+                                                            <input type="text" class="form-control" name="numero_documento" id="numero_documento" placeholder="Número de Dopcumento">
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="codigo_dactilar" class="form-label">Código Dactilar</label>
+                                                            <input type="text" class="form-control" name="codigo_dactilar" id="codigo_dactilar" placeholder="Código Dactilar">
+                                                        </div>
+                                                    </div> 
+                                                </div> 
+                                                <div class="row mb-2">
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="nombres" class="form-label">Nombres</label>
+                                                            <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombres">
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
+                                                            <input type="text" class="form-control" name="apellido_paterno" id="apellido_paterno" placeholder="Apellido Paterno">
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="apellido_materno" class="form-label">Apedllido Materno</label>
+                                                            <input type="text" class="form-control" name="apellido_materno" id="apellido_materno" placeholder="Apellido Materno">
+                                                        </div>
+                                                    </div> 
+                                                </div> 
+                                                <div class="row mb-2">
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
+                                                            <input type="text" data-plugin-datepicker class="form-control"
+                                                            name="fecha_nacimiento" id="fecha_nacimiento"
+                                                            placeholder="Fecha de nacimiento">
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="pais" class="form-label">Nacionalidad</label>
+                                                            <select id="pais" name="pais" class="form-control populate">
+                                                                <option value="-1">Seleccionar</option>
+                                                                @foreach ($paises as $id => $entidad)
+                                                                    <option value="{{ $id }}">{{ $entidad }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="tipo_sexo" class="form-label">Sexo</label>
+                                                            <select id="tipo_sexo" name="tipo_sexo" class="form-control populate">
+                                                                <option value="-1">Seleccionar</option>
+                                                                @foreach ($tiposSexo as $id => $entidad)
+                                                                    <option value="{{ $id }}">{{ $entidad }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div> 
+                                                </div> 
                                                 <div class="row mb-2">
                                                     <div class="col-md-6 gap-1">
-                                                        <label>Nombres Representante Legal</label>
-                                                        <input type="text" class="form-control"
-                                                            name="nombres_representante_legal"
-                                                            id="nombres_representante_legal"
-                                                            placeholder="Nombres Representante Legal">
+                                                        <div class="form-group">
+                                                            <label for="celular" class="form-label">Celular</label>
+                                                            <input type="text" class="form-control" name="celular" id="celular" placeholder="Celular">
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-md-6 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="email" class="form-label">Email</label>
+                                                            <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                                <div id="persona_natural" class="row mb-2">
+                                                    <div class="col-md-1 d-flex flex-column justify-content-center gap-1">
+                                                         Con RUC: 
+                                                    </div>
+                                                    <div class="col-md-5 d-flex flex-column justify-content-center gap-1"> 
+                                                        <div class="switch switch-success">
+                                                            <input type="checkbox" name="switch" data-plugin-ios-switch />
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-6 gap-1">
-                                                        <label>Apellidos Representante Legal</label>
-                                                        <input type="text" class="form-control"
-                                                            name="apellidos_representante_legal"
-                                                            id="apellidos_representante_legal"
-                                                            placeholder="Apellidos Representante Legal">
+                                                        <div class="form-group">
+                                                            <label for="ruc" class="form-label">Número de Ruc</label>
+                                                            <input type="text" class="form-control" name="ruc" id="ruc" placeholder="Número de Ruc">
+                                                        </div>
+                                                    </div>   
+                                                </div> 
+                                                <div id="representante_legal">
+                                                    <hr class="custom-hr">
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6 gap-1">
+                                                            <b>Datos de la Empresa</b>
+                                                        </div>  
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="ruc_empresa" class="form-label">RUC Empresa</label>
+                                                                <input type="text" class="form-control" name="ruc_empresa" id="ruc_empresa" placeholder="RUC Empresa">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="col-md-6 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="razon_social_empresa" class="form-label">Razón Social Empresa</label>
+                                                                <input type="text" class="form-control" name="razon_social_empresa" id="razon_social_empresa" placeholder="Razón Social Empresa">
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="cargo_representante" class="form-label">Cargo Representante</label>
+                                                                <input type="text" class="form-control" name="cargo_representante" id="cargo_representante" placeholder="Cargo Representante">
+                                                            </div>
+                                                        </div>  
                                                     </div>
                                                 </div>
-                                                <div class="row mb-2">
-                                                    <div class="col-md-6">
-                                                        <label>Teléfono Representante Legal</label>
-                                                        <input type="text" class="form-control"
-                                                            name="telefono_representante_legal"
-                                                            id="telefono_representante_legal"
-                                                            placeholder="Teléfono Representante Legal">
+                                                <div id="miembro_empresa">
+                                                    <hr class="custom-hr">
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6 gap-1">
+                                                            <b>Datos de la Empresa</b>
+                                                        </div>  
                                                     </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="ruc_empresa_miembro" class="form-label">RUC Empresa</label>
+                                                                <input type="text" class="form-control" name="ruc_empresa_miembro" id="ruc_empresa_miembro" placeholder="RUC Empresa">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="col-md-6 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="razon_social_empresa_miembro" class="form-label">Razón Social Empresa</label>
+                                                                <input type="text" class="form-control" name="razon_social_empresa_miembro" id="razon_social_empresa_miembro" placeholder="Razón Social Empresa">
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="area_miembro" class="form-label">Área</label>
+                                                                <input type="text" class="form-control" name="area_miembro" id="area_miembro" placeholder="Área">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="col-md-6 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="motivo_miembro" class="form-label">Motivo</label>
+                                                                <input type="text" class="form-control" name="motivo_miembro" id="motivo_miembro" placeholder="Motivo">
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="cargo_solicitante_miembro" class="form-label">Cargo del Solicitante</label>
+                                                                <input type="text" class="form-control" name="cargo_solicitante_miembro" id="cargo_solicitante_miembro" placeholder="Cargo del Solicitante">
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                    <hr class="custom-hr">
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6 gap-1">
+                                                            <b>Representante Legal</b>
+                                                        </div>  
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="tipo_documento_empresa" class="form-label">Tipo de Documento</label>
+                                                                <input type="text" class="form-control" name="tipo_documento_empresa" id="tipo_documento_empresa" placeholder="RUC Empresa">
+                                                            </div>
+                                                        </div> 
+                                                        <div class="col-md-6 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="numero_documento_empresa" class="form-label">Número de Documento</label>
+                                                                <input type="text" class="form-control" name="numero_documento_empresa" id="numero_documento_empresa" placeholder="Número de Documento">
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-4 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="nombres_empresa" class="form-label">Nombres</label>
+                                                                <input type="text" class="form-control" name="nombres_empresa" id="nombres_empresa" placeholder="Nombres">
+                                                            </div>
+                                                        </div>  
+                                                        <div class="col-md-4 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="apellido_paterno_empresa" class="form-label">Apellido Paterno</label>
+                                                                <input type="text" class="form-control" name="apellido_paterno_empresa" id="apellido_paterno_empresa" placeholder="Apellido Paterno">
+                                                            </div>
+                                                        </div>  
+                                                        <div class="col-md-4 gap-1">
+                                                            <div class="form-group">
+                                                                <label for="apellido_materno_empresa" class="form-label">Apellido Materno</label>
+                                                                <input type="text" class="form-control" name="apellido_materno_empresa" id="apellido_materno_empresa" placeholder="Apellido Materno">
+                                                            </div>
+                                                        </div>  
+                                                    </div>  
+                                                </div>
+                                                <hr class="custom-hr">
+                                                <div class="row mb-2">
                                                     <div class="col-md-6 gap-1">
-                                                        <label>Correo Representante Legal</label>
-                                                        <input type="text" class="form-control"
-                                                            name="correo_representante_legal"
-                                                            id="correo_representante_legal"
-                                                            placeholder="Correo Representante Legal">
-                                                        <div id="error-correo" style="color: red; display: none;">Ingrese
-                                                            un correo electrónico válido.</div>
-                                                    </div>
+                                                        <b>Dirección del Domicilio</b>
+                                                    </div>  
                                                 </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="provincia" class="form-label">Provincia</label>
+                                                            <select id="provincia" name="provincia" class="form-control populate">
+                                                                <option value="-1">Seleccionar</option>
+                                                                @foreach ($provincias as $id => $entidad)
+                                                                    <option value="{{ $id }}">{{ $entidad }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>  
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="canton" class="form-label">Ciudad</label>
+                                                            <select id="canton" name="canton" class="form-control populate">
+                                                                <option value="-1">Seleccionar</option>
+                                                                @foreach ($cantones as $id => $entidad)
+                                                                    <option value="{{ $id }}">{{ $entidad }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>   
+                                                </div> 
+                                                <div class="row mb-2"> 
+                                                    <div class="col-md-12 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="direccion_empresa" class="form-label">Dirección completa, tal como consta en su RUC</label>
+                                                            <input type="text" class="form-control" name="direccion_empresa" id="direccion_empresa" placeholder="Dirección">
+                                                        </div>
+                                                    </div>  
+                                                </div> 
+                                                <hr class="custom-hr">
                                                 <div class="row mb-2">
                                                     <div class="col-md-6 gap-1">
-                                                        <label>Cargo Representante Legal</label>
-                                                        <input type="text" class="form-control"
-                                                            name="cargo_representante_legal"
-                                                            id="cargo_representante_legal"
-                                                            placeholder="Cargo Representante Legal">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label>Dirección Representante Legal</label>
-                                                        <input type="text" class="form-control"
-                                                            name="direccion_representante_legal"
-                                                            id="direccion_representante_legal"
-                                                            placeholder="Dirección Representante Legal">
-                                                    </div>
+                                                        <b>Vigencia</b>
+                                                    </div>  
                                                 </div>
                                                 <div class="row mb-2">
-                                                    <div class="col-md-12 flex flex-col gap-1">
-                                                        <label>Logo</label>
-                                                        <input type="file" class="form-control-file" id="logoFile"
-                                                            name="file">
-                                                        <input type="hidden" name="tipoDoc" value="1">
+                                                    <div class="col-md-4 gap-1">
+                                                        <div class="form-group">
+                                                            <label for="tipo_vigencia" class="form-label">Tiempo de Vigencia</label>
+                                                            <select id="tipo_vigencia" name="tipo_vigencia" class="form-control populate">
+                                                                <option value="-1">Seleccionar</option>
+                                                                @foreach ($tiposVigencia as $id => $entidad)
+                                                                    <option value="{{ $id }}">{{ $entidad }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>   
+                                                </div>
+                                            </div> 
+                                            <div id="documentos" class="tab-pane">
+                                                <div class="row"> 
+                                                    <div class="col-6"> 
+                                                        <div class="form-group row align-items-center">
+                                                            <div class="col">
+                                                                <label for="canton" class="form-label">Foto del lado Frontal de su Cédula</label>
+                                                                <div id="cedula-frontal" class="dropzone-modern dz-square">
+                                                                    <span class="dropzone-upload-message text-center">
+                                                                        <i class="bx bxs-cloud-upload"></i>
+                                                                        <b class="text-color-primary">Arrastra/Sube</b> tu archivo aquí.
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group row align-items-center">
+                                                            <div class="col">
+                                                                <label for="canton" class="form-label">Foto del lado Posterior de su Cédula</label>
+                                                                <div id="cedula-posterior" class="dropzone-modern dz-square">
+                                                                    <span class="dropzone-upload-message text-center">
+                                                                        <i class="bx bxs-cloud-upload"></i>
+                                                                        <b class="text-color-primary">Arrastra/Sube</b> tu archivo aquí.
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div> 
@@ -341,6 +543,12 @@
 
             let camara_selected = null;
             let camaras = [];
+
+            $('#persona_natural').hide();
+            $('#representante_legal').hide();
+            $('#miembro_empresa').hide(); 
+            $('#ruc').closest('.form-group').hide();
+
             Swal.fire({
                 title: 'Cargando',
                 text: 'Por favor espere',
@@ -352,243 +560,144 @@
             });
 
             var table = $('#dataTable').DataTable({
-    destroy: true,
-    processing: false,
-    serverSide: true,
-    ajax: {
-      url: "",
-      type: "GET",
-      data: function(d) {
-        d.start = d.start || 0;
-        d.length = d.length || 10;
-        d.estado = $('#estado_camara').val(); // Enviar el valor de localidad seleccionada
-      },
-      error: function(error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          showConfirmButton: true,
-          allowOutsideClick: false,
-          confirmButtonText: 'Aceptar',
-          text: error.responseJSON?.error || "Error al cargar los datos.",
-        });
-        console.error("Error al cargar los datos: ", error);
-      },
-      complete: function(response) {
-        camaras = response.responseJSON.data;
-        Swal.close();
-      },
-    },
-    pageLength: 10,
-    columns: [
-      { data: 'fecha_ingreso', width: '3%' },
-      { data: 'ruc', width: '5%' },
-      { data: 'razon_social', width: '20%' },
-      { data: 'representante_legal', width: '15%' },
-      { data: 'cedula_representante_legal', width: '15%' },
-      {
-        data: 'fecha_desafiliacion',
-        width: '3%'
-      },
-      {
-        data: 'motivo_desafiliacion',
-        width: '10%'
-      }, 
-      { data: 'btn', width: '30%' }
-    ],
-    order: [[0, "asc"]],
-    createdRow: function(row, data, dataIndex) {
-      var td = $(row).find(".truncate");
-      td.attr("title", td.text());
-
-      var td2 = $(row).find(".truncate2");
-      td2.attr("title", td2.text());
-    }
-  });
-
-            $('#estado_camara').change(function() { 
-                Swal.fire({
-                    title: 'Cargando',
-                    text: 'Por favor espere',
-                    icon: 'info',
+                destroy: true,
+                processing: false,
+                serverSide: true,
+                ajax: {
+                url: "{{ route('admin.obtener_listado_firmas') }}",
+                type: "GET",
+                data: function(d) {
+                    d.start = d.start || 0;
+                    d.length = d.length || 10;
+                    d.estado = $('#estado_camara').val(); // Enviar el valor de localidad seleccionada
+                },
+                error: function(error) {
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    showConfirmButton: true,
                     allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading()
+                    confirmButtonText: 'Aceptar',
+                    text: error.responseJSON?.error || "Error al cargar los datos.",
+                    });
+                    console.error("Error al cargar los datos: ", error);
+                },
+                complete: function(response) {
+                    camaras = response.responseJSON.data;
+                    Swal.close();
+                },
+                },
+                pageLength: 10,
+                columns: [
+                { data: 'id', width: '3%' },
+                { data: 'tipo_solicitud', width: '5%' },
+                { data: 'tipo_documento', width: '5%' },
+                { data: 'numero_documento', width: '10%' },
+                { data: 'nombres', width: '15%' }, 
+                { data: 'apellido_paterno', width: '15%' }, 
+                { data: 'apellido_materno', width: '15%' }, 
+                { data: 'celular', width: '15%' }, 
+                { data: 'email', width: '15%' }, 
+                ],
+                order: [[0, "asc"]],
+                createdRow: function(row, data, dataIndex) {
+                var td = $(row).find(".truncate");
+                td.attr("title", td.text());
+
+                var td2 = $(row).find(".truncate2");
+                td2.attr("title", td2.text());
+                }
+            });
+
+            $('#tipo_solicitud').on('change', function () {
+                const value = $(this).val(); 
+
+                if( value === '1' ){
+
+                    $('#persona_natural').show();
+                    $('#representante_legal').hide();
+                    $('#miembro_empresa').hide(); 
+
+                }else if(value === '2'){
+
+                    $('#persona_natural').hide();
+                    $('#representante_legal').show();
+                    $('#miembro_empresa').hide(); 
+
+                }else if(value === '3'){
+
+                    $('#persona_natural').hide();
+                    $('#representante_legal').hide();
+                    $('#miembro_empresa').show(); 
+
+                }else{
+                    $('#persona_natural').hide();
+                    $('#representante_legal').hide();
+                    $('#miembro_empresa').hide(); 
+                }
+            }); 
+
+            $('[name="switch"]').on('change', function() {
+                if ($(this).prop('checked')) {
+                    $('#ruc').closest('.form-group').show(); // Mostrar campo RUC
+                } else {
+                    $('#ruc').closest('.form-group').hide(); // Ocultar campo RUC
+                }
+            });
+
+            //Jbuestan: Se agrega Dropzones para los 10 Documentos
+            $('#cedula-frontal').dropzone({
+                url: '/upload.php',
+                addRemoveLinks: true,
+                init: function() {
+                    if( $('#cedula-frontal').hasClass('dz-filled') ) {
+                        var dropzoneObj = Dropzone.forElement("#cedula-frontal"),
+                            mockFile = { name: "Image Name", size: 12345 };
+
+                            dropzoneObj.displayExistingFile(mockFile, 'img/products/product-1.jpg');
                     }
-                });
-                table.ajax.reload(); // Recargar la tabla con la cámara seleccionada 
-            });
-            // Inicializar Select2 con búsqueda habilitada
-            // Inicializar Select2
-            // Inicializar Select2
-            $('#actividad_economica').select2({
-                placeholder: "Selecciona una o más opciones",
-                width: '100%',
-                allowClear: true
-            });
-
-            function syncHiddenInput() {
-                $('#hiddenSelectedItems').val(selectedItems.join(',')); // Actualizar el campo oculto
-                console.log('Contenido actualizado de selectedItems:', selectedItems);
-            }
-
-            let selectedItems = [];
-
-            // Manejar selección de elementos
-            $('#actividad_economica').on('select2:select', function(e) {
-                const selectedId = parseInt(e.params.data.id); // Convertir a cadena
-                const selectedText = e.params.data.text;
-
-                if (!selectedItems.includes(selectedId)) {
-                    selectedItems.push(selectedId); // Agregar al array como cadena
-                    $('#selectedList').append(`
-                <span class="badge bg-primary me-2 selected-item" data-id=${selectedId}>
-                    ${selectedText} <span class="remove-item" style="cursor: pointer;">&times;</span>
-                </span>
-            `);
-                    syncHiddenInput(); // Sincronizar el campo oculto
                 }
+            }).addClass('dropzone initialized');
 
-                $(this).val(null).trigger('change'); // Resetear el dropdown
-            });
+            $('#cedula-posterior').dropzone({
+                url: '/upload.php',
+                addRemoveLinks: true,
+                init: function() {
+                    if( $('#cedula-posterior').hasClass('dz-filled') ) {
+                        var dropzoneObj = Dropzone.forElement("#cedula-posterior"),
+                            mockFile = { name: "Image Name", size: 12345 };
 
-            // Manejar eliminación de elementos seleccionados (badge)
-            $('#selectedList').on('click', '.remove-item', function() {
-                const badge = $(this).closest('.selected-item');
-                const id = badge.data('id'); // Convertir a cadena
-
-                // Eliminar el ID del array
-                selectedItems = selectedItems.filter(item => item !== id);
-                console.log(`Eliminado del array: ${id}, Nuevo contenido: ${selectedItems}`); // Depuración
-
-                // Eliminar visualmente el badge
-                badge.remove();
-
-                // Restaurar la opción en el dropdown
-                const optionElement = $(`#actividad_economica option[value=${id}]`);
-                optionElement.prop('disabled', false).prop('selected', false);
-
-                syncHiddenInput(); // Sincronizar el campo oculto
-            });
-
-            // Sincronizar al quitar desde el dropdown
-            $('#actividad_economica').on('select2:unselect', function(e) {
-                const unselectedId = (e.params.data.id); // Convertir a cadena
-
-                // Eliminar visualmente el badge
-                $(`#selectedList .selected-item[data-id=${unselectedId}]`).remove();
-
-                // Eliminar el ID del array
-                selectedItems = selectedItems.filter(item => item !== unselectedId);
-                console.log(
-                    `Eliminado desde dropdown: ${unselectedId}, Nuevo contenido: ${selectedItems}`
-                ); // Depuración
-
-                syncHiddenInput(); // Sincronizar el campo oculto
-            });
-
-            // Actualizar el array 'selectedItems' cuando cambie la selección en Select2
-            /*$('#actividad_economica').on('change', function () {
-                selectedItems = $(this).val() || []; // Sincronizar con los valores seleccionados reales
-            });*/
-
-            //Para el Mod
-            $('#actividad_economica_mod').select2({
-                placeholder: "Selecciona una o más opciones",
-                width: '100%',
-                allowClear: true
-            });
-
-            function syncHiddenInputMod() {
-                $('#hiddenSelectedItemsMod').val(selectedItemsMod.join(',')); // Actualizar el campo oculto
-                console.log('Contenido actualizado de selectedItemsMod:', selectedItemsMod);
-            }
-
-            let selectedItemsMod = [];
-
-            // Manejar selección de elementos
-            $('#actividad_economica_mod').on('select2:select', function(e) {
-                const selectedId = parseInt(e.params.data.id); // Convertir a cadena
-                const selectedText = e.params.data.text;
-
-                if (!selectedItemsMod.includes(selectedId)) {
-                    selectedItemsMod.push(selectedId); // Agregar el ID al array
-                    $('#selectedList_mod').append(`
-                    <span class="badge bg-primary me-2 selected-item" data-id=${selectedId}>
-                        ${selectedText} <span class="remove-item" style="cursor: pointer;">&times;</span>
-                    </span>
-                `);
-
-                    syncHiddenInputMod(); // Sincronizar el campo oculto
+                            dropzoneObj.displayExistingFile(mockFile, 'img/products/product-1.jpg');
+                    }
                 }
+            }).addClass('dropzone initialized');
 
-                $(this).val(null).trigger('change'); // Resetear el dropdown
-            });
+            $('#cedula-selfie').dropzone({
+                url: '/upload.php',
+                addRemoveLinks: true,
+                init: function() {
+                    if( $('#cedula-selfie').hasClass('dz-filled') ) {
+                        var dropzoneObj = Dropzone.forElement("#cedula-selfie"),
+                            mockFile = { name: "Image Name", size: 12345 };
 
-            // Manejar eliminación de elementos seleccionados (badge)
-            $('#selectedList_mod').on('click', '.remove-item', function() {
-                const badge = $(this).closest('.selected-item');
-                const id = (badge.data('id')); // Convertir a cadena
+                            dropzoneObj.displayExistingFile(mockFile, 'img/products/product-1.jpg');
+                    }
+                }
+            }).addClass('dropzone initialized'); 
 
-                // Eliminar el ID del array
-                selectedItemsMod = selectedItemsMod.filter(item => item !== id);
-                console.log(
-                    `Eliminado del array Mod: ${id}, Nuevo contenido Mod: ${selectedItemsMod}`
-                ); // Depuración
+            $('#ruc-image').dropzone({
+                url: '/upload.php',
+                addRemoveLinks: true,
+                init: function() {
+                    if( $('#ruc-image').hasClass('dz-filled') ) {
+                        var dropzoneObj = Dropzone.forElement("#ruc-image"),
+                            mockFile = { name: "Image Name", size: 12345 };
 
-                // Eliminar visualmente el badge
-                badge.remove();
+                            dropzoneObj.displayExistingFile(mockFile, 'img/products/product-1.jpg');
+                    }
+                }
+            }).addClass('dropzone initialized');
 
-                // Restaurar la opción en el dropdown
-                const optionElement = $(`#actividad_economica_mod option[value=${id}]`);
-                optionElement.prop('disabled', false).prop('selected', false);
-
-                syncHiddenInputMod(); // Sincronizar el campo oculto
-            });
-
-            // Sincronizar al quitar desde el dropdown
-            $('#actividad_economica_mod').on('select2:unselect', function(e) {
-                const unselectedId = e.params.data.id; // Convertir a cadena
-
-                // Eliminar visualmente el badge
-                $(`#selectedList_mod .selected-item[data-id=${unselectedId}]`).remove();
-
-                // Eliminar el ID del array
-                selectedItemsMod = selectedItemsMod.filter(item => item !== unselectedId);
-                console.log(
-                    `Eliminado desde dropdown Mod: ${unselectedId}, Nuevo contenido Mod: ${selectedItemsMod}`
-                ); // Depuración
-
-                syncHiddenInputMod(); // Sincronizar el campo oculto
-            });
-
-
-            $('#ModalCamara').on('show.bs.modal', function() {
-                // Reiniciar el array de ítems seleccionados
-                selectedItems = [];
-
-                // Limpiar lista de badges y el campo oculto
-                $('#selectedList').empty();
-                $('#hiddenSelectedItems').val('');
-
-                // Limpiar completamente el select, establecer en blanco
-                $('#actividad_economica').val([]).trigger('change'); // Para select2 u otros plugins
-                $('#actividad_economica option:selected').prop('selected', false); // Fuerza la deselección
-                console.log('Modal abierto, campos limpios');
-            });
-
-            $('#ModalCamara').on('hidden.bs.modal', function() {
-                selectedItems = [];
-
-                // Limpiar lista de badges y el campo oculto
-                $('#selectedList').empty();
-                $('#hiddenSelectedItems').val('');
-
-                // Limpiar completamente el select, establecer en blanco
-                $('#actividad_economica').val([]).trigger('change'); // Para select2 u otros plugins
-                $('#actividad_economica option:selected').prop('selected', false); // Fuerza la deselección
-                console.log('Modal abierto, campos limpios');
-            });
 
 
             //Manejo de Fechas
@@ -1554,7 +1663,14 @@
                 showMonthAfterYear: false,
                 yearSuffix: ''
             };
-            $.datepicker.setDefaults($.datepicker.regional['es']);
+            $.datepicker.setDefaults($.datepicker.regional['es']); 
+
+            $('#fecha_nacimiento').datepicker('destroy').datepicker({
+                format: 'dd/mm/yyyy', // Define el formato de fecha
+                autoclose: true, // Cierra automáticamente al seleccionar
+                todayHighlight: true, // Resalta la fecha actual
+                language: 'es' // Asegúrate de establecer el idioma correcto
+            });
 
             $('#fecha_ingreso').datepicker('destroy').datepicker({
                 format: 'dd/mm/yyyy', // Define el formato de fecha
@@ -2536,55 +2652,10 @@
                     // El usuario canceló la eliminación
                     console.log('Eliminación cancelada por el usuario.');
                 }
-            });
-
-            $('#pais').change(function() {
-                let paisId = $(this).val();
-
-                if (paisId != -1) {
-                    $.ajax({
-                        url: '/get-provincias', // Ruta para obtener las provincias
-                        method: 'GET',
-                        data: {
-                            id_pais: paisId
-                        },
-                        success: function(response) {
-                            let provincias = response.provincias;
-                            let $provinciaSelect = $('#provincia');
-                            let $cantonSelect = $('#canton');
-                            let $parroquiaSelect = $('#parroquia');
-
-                            $provinciaSelect.empty(); // Limpiamos el select de provincias
-                            $provinciaSelect.append(
-                                '<option value=-1>Seleccionar</option>'
-                            ); // Opción por defecto
-
-                            $cantonSelect.empty(); // Limpiamos el select de provincias
-                            $cantonSelect.append(
-                                '<option value=-1>Seleccionar</option>'
-                            ); // Opción por defecto
-
-                            $parroquiaSelect.empty(); // Limpiamos el select de provincias
-                            $parroquiaSelect.append(
-                                '<option value=-1>Seleccionar</option>'
-                            ); // Opción por defecto
-
-                            // Agregamos las provincias al select
-                            provincias.forEach(function(provincia) {
-                                $provinciaSelect.append(
-                                    `<option value=${provincia.id}>${provincia.nombre}</option>`
-                                );
-                            });
-                        },
-                        error: function() {
-                            alert('Hubo un error al cargar las provincias.');
-                        }
-                    });
-                }
-            });
+            }); 
 
             $('#provincia').change(function() {
-                let paisId = $('#pais').val(); // ID del país seleccionado
+                let paisId = 57; // ID del país seleccionado
                 let provinciaId = $(this).val(); // ID de la provincia seleccionada
 
                 if (paisId != -1 && provinciaId != -1) {

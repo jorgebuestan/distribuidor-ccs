@@ -40,6 +40,24 @@
 		<!-- Head Libs -->
 		<script src="{{ URL::asset('porto/vendor/modernizr/modernizr.js') }}"></script>
 
+   
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> 
+		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css') }}" /> 
+		 
+		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/elusive-icons/css/elusive-icons.css') }}" />
+
+		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/select2/css/select2.css') }}" />
+		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/select2-bootstrap-theme/select2-bootstrap.min.css') }}" />
+		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/pnotify/pnotify.custom.css') }}" />
+
+		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/datatables/media/css/dataTables.bootstrap5.css') }}" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/bootstrap-markdown/css/bootstrap-markdown.min.css') }}" />
+		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/dropzone/basic.css') }}" />
+		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/dropzone/dropzone.css') }}" />
+
 	</head>
 	<body>
 		<section class="body">
@@ -259,6 +277,13 @@
     <script src="{{ URL::asset('porto/vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js') }}"></script>
     <script src="{{ URL::asset('porto/vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js') }}"></script>
 
+ 
+	<script src="{{ URL::asset('porto/vendor/bootstrap-markdown/js/markdown.js') }}"></script>
+	<script src="{{ URL::asset('porto/vendor/bootstrap-markdown/js/to-markdown.js') }}"></script>
+	<script src="{{ URL::asset('porto/vendor/bootstrap-markdown/js/bootstrap-markdown.js') }}"></script> 
+	<script src="{{ URL::asset('porto/vendor/ios7-switch/ios7-switch.js') }}"></script>
+	<script src="{{ URL::asset('porto/vendor/dropzone/dropzone.js') }}"></script>
+
     <!-- Theme Base, Components and Settings -->
     <script src="{{ URL::asset('porto/js/theme.js') }}"></script>
 
@@ -281,6 +306,20 @@
     <script src="{{ URL::asset('porto/js/examples/examples.datatables.default.js') }}"></script>
     <script src="{{ URL::asset('porto/js/examples/examples.datatables.row.with.details.js') }}"></script>
     <script src="{{ URL::asset('porto/js/examples/examples.datatables.tabletools.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="{{ URL::asset('porto/js/examples/examples.advanced.form.js') }}"></script>
+	<script src="{{ URL::asset('porto/js/examples/examples.header.menu.js') }}"></script>
+	<script src="{{ URL::asset('porto/js/examples/examples.ecommerce.form.js') }}"></script>
+
+	
+	<style>
+		.custom-hr {
+			height: 5px; /* Ajusta el grosor */
+			background-color: black; /* Cambia el color */
+			border: none; /* Elimina bordes predeterminados */
+		}
+	</style>
 
 	</body>
 </html>
