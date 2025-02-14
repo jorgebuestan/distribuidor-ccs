@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirmaController;
+use App\Http\Controllers\EmpresaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/firmas', [FirmaController::class, 'index'])->name('firmas.index');
+    Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas.index');
 
 });
 

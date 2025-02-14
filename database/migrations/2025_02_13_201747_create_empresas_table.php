@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
             $table->text('razon_social');
+            $table->boolean('obligado_contabilidad');
             $table->text('ruc');
             $table->integer('id_tipo_contribuyente');
             $table->text('direccion');

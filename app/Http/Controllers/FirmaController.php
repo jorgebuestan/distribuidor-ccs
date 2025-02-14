@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Pais;
 use App\Models\Provincia;
 use App\Models\Canton;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class FirmaController extends Controller
 {
