@@ -1163,7 +1163,7 @@
             });  
 
             $("#numero_documento_empresa").on("input", function() {
-                var tipo_documento = $("#tipo_documento").val();
+                var tipo_documento = $("#tipo_documento_empresa").val();
 
                 if (tipo_documento == 1) {
                     var ruc = $(this).val().replace(/\D/g, ''); // Eliminar caracteres no numéricos
@@ -1171,14 +1171,50 @@
                     $(this).val(ruc); // Asignar el valor limpio al input
 
                     if (/^\d{10}$/.test(ruc)) { // Validar si tiene exactamente 10 dígitos
-                        $("#error-numero-documento").hide(); // Ocultar error
+                        $("#error-numero-documento-empresa").hide(); // Ocultar error
                     } else {
-                        $("#error-numero-documento").show(); // Mostrar error
+                        $("#error-numero-documento-empresa").show(); // Mostrar error
                     }
                 }
                 if (tipo_documento == 2) {
-                    $("#error-numero-documento").hide(); // Ocultar error
+                    $("#error-numero-documento-empresa").hide(); // Ocultar error
                 }
+            });  
+
+            $("#ruc").on("input", function() { 
+                var ruc = $(this).val().replace(/\D/g, ''); // Eliminar caracteres no numéricos
+
+                $(this).val(ruc); // Asignar el valor limpio al input
+
+                if (/^\d{13}$/.test(ruc)) { // Validar si tiene exactamente 10 dígitos
+                    $("#error-ruc").hide(); // Ocultar error
+                } else {
+                    $("#error-ruc").show(); // Mostrar error
+                } 
+            });
+
+            $("#ruc_empresa").on("input", function() { 
+                var ruc = $(this).val().replace(/\D/g, ''); // Eliminar caracteres no numéricos
+
+                $(this).val(ruc); // Asignar el valor limpio al input
+
+                if (/^\d{13}$/.test(ruc)) { // Validar si tiene exactamente 10 dígitos
+                    $("#error-ruc-empresa").hide(); // Ocultar error
+                } else {
+                    $("#error-ruc-empresa").show(); // Mostrar error
+                } 
+            });
+
+            $("#ruc_empresa_miembro").on("input", function() { 
+                var ruc = $(this).val().replace(/\D/g, ''); // Eliminar caracteres no numéricos
+
+                $(this).val(ruc); // Asignar el valor limpio al input
+
+                if (/^\d{13}$/.test(ruc)) { // Validar si tiene exactamente 10 dígitos
+                    $("#error-ruc-miembro").hide(); // Ocultar error
+                } else {
+                    $("#error-ruc-miembro").show(); // Mostrar error
+                } 
             });
 
             $("#email").on("input", function() {
@@ -1366,36 +1402,41 @@
                 }
 
                 if ($('#tipo_solicitud').val() == "1") {
-                    if ($('#switch_ruc').is(':checked')) {
-                        if ($('#ruc').val().trim() === '') {
+                    if ($('#switch_ruc').is(':checked')) { 
+                        
+                        if (!/^\d{13}$/.test($('#ruc').val())) { 
+                            $("#error-ruc").show(); 
                             await Swal.fire({
                                 target: document.getElementById('ModalFirma'),
                                 icon: 'error',
                                 title: 'Error',
-                                text: 'Debe ingresar el RUC',
+                                text: 'El RUC debe tener 13 dígitos',
                                 confirmButtonText: 'Aceptar',
                                 allowOutsideClick: false
-                            });  
+                            });
+                            //$('.nav-tabs a[href="#datos_generales"]').tab('show');
                             $('#ruc').focus();
-                            return false;
+                            return;
                         }
                     }
                 }
 
                 if ($('#tipo_solicitud').val() == "2") {
 
-                    if ($('#ruc_empresa').val() == "") { 
+                    if (!/^\d{13}$/.test($('#ruc_empresa').val())) { 
+                        $("#error-ruc-empresa").show(); 
                         await Swal.fire({
                             target: document.getElementById('ModalFirma'),
                             icon: 'error',
                             title: 'Error',
-                            text: 'Debe registrar el RUC de la Empresa',
+                            text: 'El RUC debe tener 13 dígitos',
                             confirmButtonText: 'Aceptar',
                             allowOutsideClick: false
-                        }); 
+                        });
+                        //$('.nav-tabs a[href="#datos_generales"]').tab('show');
                         $('#ruc_empresa').focus();
                         return;
-                    } 
+                    }
 
                     if ($('#razon_social_empresa').val() == "") { 
                         await Swal.fire({
@@ -1427,18 +1468,20 @@
 
                 if ($('#tipo_solicitud').val() == "3") {
 
-                    if ($('#ruc_empresa_miembro').val() == "") { 
+                    if (!/^\d{13}$/.test($('#ruc_empresa_miembro').val())) { 
+                        $("#error-ruc-miembro").show(); 
                         await Swal.fire({
                             target: document.getElementById('ModalFirma'),
                             icon: 'error',
                             title: 'Error',
-                            text: 'Debe registrar el RUC de la Empresa',
+                            text: 'El RUC debe tener 13 dígitos',
                             confirmButtonText: 'Aceptar',
                             allowOutsideClick: false
-                        }); 
+                        });
+                        //$('.nav-tabs a[href="#datos_generales"]').tab('show');
                         $('#ruc_empresa_miembro').focus();
                         return;
-                    } 
+                    }
 
                     if ($('#razon_social_empresa_miembro').val() == "") { 
                         await Swal.fire({
@@ -1490,7 +1533,74 @@
                         }); 
                         $('#cargo_solicitante_miembro').focus();
                         return;
-                    } 
+                    }
+                    
+                    if ($('#tipo_documento_empresa').val() == "-1") { 
+                        await Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Debe seleccionar un Tipo de Documento del Representante Legal',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        }); 
+                        $('#tipo_documento_empresa').focus();
+                        return;
+                    }
+
+                    if (!/^\d{10}$/.test($('#numero_documento_empresa').val())) { 
+                        $("#error-numero-documento-empresa").show(); 
+                        await Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'El Número de Documento del Representante Legal debe tener 10 dígitos',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        });
+                        //$('.nav-tabs a[href="#datos_generales"]').tab('show');
+                        $('#numero_documento_empresa').focus();
+                        return;
+                    }
+
+                    if ($('#nombres_empresa').val() == "") { 
+                        await Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Debe registrar los Nommbres del Representante Legal',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        }); 
+                        $('#nombres_empresa').focus();
+                        return;
+                    }
+
+                    if ($('#apellido_paterno_empresa').val() == "") { 
+                        await Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Debe registrar el Apellido Paterno del Representante Legal',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        }); 
+                        $('#apellido_paterno_empresa').focus();
+                        return;
+                    }
+
+                    if ($('#apellido_materno_empresa').val() == "") { 
+                        await Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Debe registrar el APellido Materno del Representante Legal',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        }); 
+                        $('#apellido_materno_empresa').focus();
+                        return;
+                    }
 
                 }
 
@@ -1503,8 +1613,7 @@
                         text: 'Debe seleccionar la Provincia',
                         confirmButtonText: 'Aceptar',
                         allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_tributarios"]').tab('show');
+                    }); 
                     $('#provincia').focus();
                     return;
                 }
@@ -1518,8 +1627,7 @@
                         text: 'Debe seleccionar la Ciudad',
                         confirmButtonText: 'Aceptar',
                         allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_tributarios"]').tab('show');
+                    }); 
                     $('#canton').focus();
                     return;
                 }
