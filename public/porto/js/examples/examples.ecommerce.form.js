@@ -27,11 +27,54 @@ Theme Version: 	4.0.0
 				}
 			}
 		}).addClass('dropzone initialized');
+ 
 	}
+
+	
 
 	// First Load
 	$(document).ready(function(){
 		if( $('#dropzone-form-image').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#cedula-frontal').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#cedula-posterior').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#cedula-selfie').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#ruc-image').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#documento-adicional').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#constitucion-compania').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#nombramiento-representante').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#aceptacion-nombramiento').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#cedula-representante').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#autorizacion-representante').get(0) ) {
 			initializeDropzone();
 		}
 	});
@@ -39,6 +82,46 @@ Theme Version: 	4.0.0
 	// Sidebar Overlay Form Show
 	$(window).on('ecommerce.sidebar.overlay.show', function(){
 		if( $('#dropzone-form-image').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#cedula-frontal').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#cedula-posterior').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#cedula-selfie').get(0) ) {
+			initializeDropzone();
+		} 
+
+		if( $('#ruc-image').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#documento-adicional').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#constitucion-compania').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#nombramiento-representante').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#aceptacion-nombramiento').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#cedula-representante').get(0) ) {
+			initializeDropzone();
+		}
+
+		if( $('#autorizacion-representante').get(0) ) {
 			initializeDropzone();
 		}
 	});
@@ -150,6 +233,166 @@ Theme Version: 	4.0.0
 						formFieldsData.images = imagesArr;
 					}
 				}
+
+				if( $('#cedula-frontal').get(0) ) {
+					var dropzoneObj = Dropzone.forElement("#cedula-frontal");
+					if( typeof dropzoneObj != 'undefined' && dropzoneObj.files.length > 0 ) {
+						var imagesArr = [];
+
+						for(var i = 0; i < dropzoneObj.files.length; i++) {
+							imagesArr.push({
+								dataURL: dropzoneObj.files[i].dataURL,
+								upload: dropzoneObj.files[i].upload	
+							});
+						}
+
+						formFieldsData.images = imagesArr;
+					}
+				}
+
+				if( $('#cedula-posterior').get(0) ) {
+					var dropzoneObj = Dropzone.forElement("#cedula-posterior");
+					if( typeof dropzoneObj != 'undefined' && dropzoneObj.files.length > 0 ) {
+						var imagesArr = [];
+
+						for(var i = 0; i < dropzoneObj.files.length; i++) {
+							imagesArr.push({
+								dataURL: dropzoneObj.files[i].dataURL,
+								upload: dropzoneObj.files[i].upload	
+							});
+						}
+
+						formFieldsData.images = imagesArr;
+					}
+				}
+
+				if( $('#cedula-selfie').get(0) ) {
+					var dropzoneObj = Dropzone.forElement("#cedula-selfie");
+					if( typeof dropzoneObj != 'undefined' && dropzoneObj.files.length > 0 ) {
+						var imagesArr = [];
+
+						for(var i = 0; i < dropzoneObj.files.length; i++) {
+							imagesArr.push({
+								dataURL: dropzoneObj.files[i].dataURL,
+								upload: dropzoneObj.files[i].upload	
+							});
+						}
+
+						formFieldsData.images = imagesArr;
+					}
+				}
+
+				if( $('#ruc-image').get(0) ) {
+					var dropzoneObj = Dropzone.forElement("#ruc-image");
+					if( typeof dropzoneObj != 'undefined' && dropzoneObj.files.length > 0 ) {
+						var imagesArr = [];
+
+						for(var i = 0; i < dropzoneObj.files.length; i++) {
+							imagesArr.push({
+								dataURL: dropzoneObj.files[i].dataURL,
+								upload: dropzoneObj.files[i].upload	
+							});
+						}
+
+						formFieldsData.images = imagesArr;
+					}
+				} 
+
+				if( $('#documento-adicional').get(0) ) {
+					var dropzoneObj = Dropzone.forElement("#documento-adicional");
+					if( typeof dropzoneObj != 'undefined' && dropzoneObj.files.length > 0 ) {
+						var imagesArr = [];
+
+						for(var i = 0; i < dropzoneObj.files.length; i++) {
+							imagesArr.push({
+								dataURL: dropzoneObj.files[i].dataURL,
+								upload: dropzoneObj.files[i].upload	
+							});
+						}
+
+						formFieldsData.images = imagesArr;
+					}
+				} 
+				
+				if( $('#constitucion-compania').get(0) ) {
+					var dropzoneObj = Dropzone.forElement("#constitucion-compania");
+					if( typeof dropzoneObj != 'undefined' && dropzoneObj.files.length > 0 ) {
+						var imagesArr = [];
+
+						for(var i = 0; i < dropzoneObj.files.length; i++) {
+							imagesArr.push({
+								dataURL: dropzoneObj.files[i].dataURL,
+								upload: dropzoneObj.files[i].upload	
+							});
+						}
+
+						formFieldsData.images = imagesArr;
+					}
+				}  
+
+				if( $('#nombramiento-representante').get(0) ) {
+					var dropzoneObj = Dropzone.forElement("#nombramiento-representante");
+					if( typeof dropzoneObj != 'undefined' && dropzoneObj.files.length > 0 ) {
+						var imagesArr = [];
+
+						for(var i = 0; i < dropzoneObj.files.length; i++) {
+							imagesArr.push({
+								dataURL: dropzoneObj.files[i].dataURL,
+								upload: dropzoneObj.files[i].upload	
+							});
+						}
+
+						formFieldsData.images = imagesArr;
+					}
+				}  
+
+				if( $('#aceptacion-nombramiento').get(0) ) {
+					var dropzoneObj = Dropzone.forElement("#aceptacion-nombramiento");
+					if( typeof dropzoneObj != 'undefined' && dropzoneObj.files.length > 0 ) {
+						var imagesArr = [];
+
+						for(var i = 0; i < dropzoneObj.files.length; i++) {
+							imagesArr.push({
+								dataURL: dropzoneObj.files[i].dataURL,
+								upload: dropzoneObj.files[i].upload	
+							});
+						}
+
+						formFieldsData.images = imagesArr;
+					}
+				}   
+
+				if( $('#cedula-representante').get(0) ) {
+					var dropzoneObj = Dropzone.forElement("#cedula-representante");
+					if( typeof dropzoneObj != 'undefined' && dropzoneObj.files.length > 0 ) {
+						var imagesArr = [];
+
+						for(var i = 0; i < dropzoneObj.files.length; i++) {
+							imagesArr.push({
+								dataURL: dropzoneObj.files[i].dataURL,
+								upload: dropzoneObj.files[i].upload	
+							});
+						}
+
+						formFieldsData.images = imagesArr;
+					}
+				}   
+
+				if( $('#autorizacion-representante').get(0) ) {
+					var dropzoneObj = Dropzone.forElement("#autorizacion-representante");
+					if( typeof dropzoneObj != 'undefined' && dropzoneObj.files.length > 0 ) {
+						var imagesArr = [];
+
+						for(var i = 0; i < dropzoneObj.files.length; i++) {
+							imagesArr.push({
+								dataURL: dropzoneObj.files[i].dataURL,
+								upload: dropzoneObj.files[i].upload	
+							});
+						}
+
+						formFieldsData.images = imagesArr;
+					}
+				}    
 
 				// Submit Button
 				var $submitButton = $('.submit-button'),

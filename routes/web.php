@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FirmaController;
-use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\FirmaController; 
+use App\Http\Controllers\FuncionesGeneralesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,13 +29,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+     //Funciones Generales
+     Route::get('/get-provincias', [FuncionesGeneralesController::class, 'get_provincias'])->middleware('auth')->name('funciones_generales.get_provincias');
+     Route::get('/get-cantones', [FuncionesGeneralesController::class, 'get_cantones'])->middleware('auth')->name('funciones_generales.get_cantones');
+     Route::get('/get-parroquias', [FuncionesGeneralesController::class, 'get_parroquias'])->middleware('auth')->name('funciones_generales.get_parroquias');
 
-    Route::get('/firmas', [FirmaController::class, 'index'])->name('firmas.index');
-
-    Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas.index');
-    Route::get('/obtener_listado_empresas', [EmpresaController::class, 'obtener_listado_empresas'])->name('admin.obtener_listado_empresas');
-    Route::post('/registrar_empresa', [EmpresaController::class, 'registrar_empresa'])->name('admin.registrar_empresa');
-
+    //Para Manejo de Firmas
+    Route::get('/administrador/firmas', [FirmaController::class, 'index'])->middleware('auth')->name('firmas.index'); 
+    Route::get('/administrador/obtener_listado_firmas', [FirmaController::class, 'obtener_listado_firmas'])->middleware('auth')->name('admin.obtener_listado_firmas');
+    Route::post('/administrador/registrar_firma', [FirmaController::class, 'registrar_firma'])->middleware('auth')->name('admin.registrar_firma');
+    
 });
 
 require __DIR__.'/auth.php';

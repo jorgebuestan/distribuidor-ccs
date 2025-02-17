@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class TipoSolicitud extends Model
 {
     use HasFactory;
+    protected $table = 'tipo_solicitud'; 
 }
