@@ -19,7 +19,7 @@ class TipoDocumentoSeeder extends Seeder
         ]); 
 
         DB::table('tipo_documento')->insert([  
-            'descripcion' => 'PASAPOPRTE' 
+            'descripcion' => 'PASAPORTE' 
         ]);
     }
 }

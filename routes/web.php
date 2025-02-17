@@ -35,9 +35,10 @@ Route::middleware('auth')->group(function () {
      Route::get('/get-parroquias', [FuncionesGeneralesController::class, 'get_parroquias'])->middleware('auth')->name('funciones_generales.get_parroquias');
 
     //Para Manejo de Firmas
-    Route::get('/firmas', [FirmaController::class, 'index'])->middleware('auth')->name('firmas.index'); 
+    Route::get('/administrador/firmas', [FirmaController::class, 'index'])->middleware('auth')->name('firmas.index'); 
     Route::get('/administrador/obtener_listado_firmas', [FirmaController::class, 'obtener_listado_firmas'])->middleware('auth')->name('admin.obtener_listado_firmas');
-     
+    Route::post('/administrador/registrar_firma', [FirmaController::class, 'registrar_firma'])->middleware('auth')->name('admin.registrar_firma');
+    
 });
 
 require __DIR__.'/auth.php';
