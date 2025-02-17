@@ -319,7 +319,7 @@
 			background-color: black; /* Cambia el color */
 			border: none; /* Elimina bordes predeterminados */
 		}
-	</style>
+	</style> 
 
 	</body>
 </html>

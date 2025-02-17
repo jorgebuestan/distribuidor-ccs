@@ -315,6 +315,8 @@
                                                         <div class="form-group">
                                                             <label for="ruc" class="form-label">Número de Ruc</label>
                                                             <input type="text" class="form-control" name="ruc" id="ruc" placeholder="Número de Ruc">
+                                                            <div id="error-ruc" style="color: red; display: none;">El RUC debe
+                                                            tener 13 dígitos.</div>
                                                         </div>
                                                     </div>   
                                                 </div> 
@@ -330,6 +332,8 @@
                                                             <div class="form-group">
                                                                 <label for="ruc_empresa" class="form-label">RUC Empresa</label>
                                                                 <input type="text" class="form-control" name="ruc_empresa" id="ruc_empresa" placeholder="RUC Empresa">
+                                                                <div id="error-ruc-empresa" style="color: red; display: none;">El RUC debe
+                                                            tener 13 dígitos.</div>
                                                             </div>
                                                         </div> 
                                                         <div class="col-md-6 gap-1">
@@ -360,6 +364,8 @@
                                                             <div class="form-group">
                                                                 <label for="ruc_empresa_miembro" class="form-label">RUC Empresa</label>
                                                                 <input type="text" class="form-control" name="ruc_empresa_miembro" id="ruc_empresa_miembro" placeholder="RUC Empresa">
+                                                                <div id="error-ruc-miembro" style="color: red; display: none;">El RUC debe
+                                                            tener 13 dígitos.</div>
                                                             </div>
                                                         </div> 
                                                         <div class="col-md-6 gap-1">
@@ -413,6 +419,8 @@
                                                             <div class="form-group">
                                                                 <label for="numero_documento_empresa" class="form-label">Número de Documento</label>
                                                                 <input type="text" class="form-control" name="numero_documento_empresa" id="numero_documento_empresa" placeholder="Número de Documento">
+                                                                <div id="error-numero-documento-empresa" style="color: red; display: none;">El Número de Documento debe
+                                                            tener 10 dígitos.</div>
                                                             </div>
                                                         </div>  
                                                     </div>
@@ -1136,6 +1144,25 @@
 
             // Validar campo RUC
             $("#numero_documento").on("input", function() {
+                var tipo_documento = $("#tipo_documento").val();
+
+                if (tipo_documento == 1) {
+                    var ruc = $(this).val().replace(/\D/g, ''); // Eliminar caracteres no numéricos
+
+                    $(this).val(ruc); // Asignar el valor limpio al input
+
+                    if (/^\d{10}$/.test(ruc)) { // Validar si tiene exactamente 10 dígitos
+                        $("#error-numero-documento").hide(); // Ocultar error
+                    } else {
+                        $("#error-numero-documento").show(); // Mostrar error
+                    }
+                }
+                if (tipo_documento == 2) {
+                    $("#error-numero-documento").hide(); // Ocultar error
+                }
+            });  
+
+            $("#numero_documento_empresa").on("input", function() {
                 var tipo_documento = $("#tipo_documento").val();
 
                 if (tipo_documento == 1) {
