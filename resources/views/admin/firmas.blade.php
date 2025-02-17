@@ -818,6 +818,9 @@
             $('#cedula-frontal').dropzone({
                 url: '/upload.php',
                 addRemoveLinks: true,
+                autoProcessQueue: false, // Evita la subida automática
+                maxFiles: 1,
+                acceptedFiles: "image/jpeg, image/png",
                 init: function() {
                     if( $('#cedula-frontal').hasClass('dz-filled') ) {
                         var dropzoneObj = Dropzone.forElement("#cedula-frontal"),
@@ -831,6 +834,9 @@
             $('#cedula-posterior').dropzone({
                 url: '/upload.php',
                 addRemoveLinks: true,
+                autoProcessQueue: false, // Evita la subida automática
+                maxFiles: 1,
+                acceptedFiles: "image/jpeg, image/png",
                 init: function() {
                     if( $('#cedula-posterior').hasClass('dz-filled') ) {
                         var dropzoneObj = Dropzone.forElement("#cedula-posterior"),
@@ -844,6 +850,9 @@
             $('#cedula-selfie').dropzone({
                 url: '/upload.php',
                 addRemoveLinks: true,
+                autoProcessQueue: false, // Evita la subida automática
+                maxFiles: 1,
+                acceptedFiles: "image/jpeg, image/png",
                 init: function() {
                     if( $('#cedula-selfie').hasClass('dz-filled') ) {
                         var dropzoneObj = Dropzone.forElement("#cedula-selfie"),
@@ -857,6 +866,9 @@
             $('#ruc-image').dropzone({
                 url: '/upload.php',
                 addRemoveLinks: true,
+                autoProcessQueue: false, // Evita la subida automática
+                maxFiles: 1,
+                acceptedFiles: "application/pdf",
                 init: function() {
                     if( $('#ruc-image').hasClass('dz-filled') ) {
                         var dropzoneObj = Dropzone.forElement("#ruc-image"),
@@ -870,6 +882,8 @@
             $('#documento-adicional').dropzone({
                 url: '/upload.php',
                 addRemoveLinks: true,
+                autoProcessQueue: false, // Evita la subida automática
+                maxFiles: 1, 
                 init: function() {
                     if( $('#documento-adicional').hasClass('dz-filled') ) {
                         var dropzoneObj = Dropzone.forElement("#documento-adicional"),
@@ -883,6 +897,9 @@
             $('#constitucion-compania').dropzone({
                 url: '/upload.php',
                 addRemoveLinks: true,
+                autoProcessQueue: false, // Evita la subida automática
+                maxFiles: 1,
+                acceptedFiles: "application/pdf",
                 init: function() {
                     if( $('#constitucion-compania').hasClass('dz-filled') ) {
                         var dropzoneObj = Dropzone.forElement("#constitucion-compania"),
@@ -896,6 +913,9 @@
             $('#nombramiento-representante').dropzone({
                 url: '/upload.php',
                 addRemoveLinks: true,
+                autoProcessQueue: false, // Evita la subida automática
+                maxFiles: 1,
+                acceptedFiles: "application/pdf",
                 init: function() {
                     if( $('#nombramiento-representante').hasClass('dz-filled') ) {
                         var dropzoneObj = Dropzone.forElement("#nombramiento-representante"),
@@ -909,6 +929,9 @@
             $('#aceptacion-nombramiento').dropzone({
                 url: '/upload.php',
                 addRemoveLinks: true,
+                autoProcessQueue: false, // Evita la subida automática
+                maxFiles: 1,
+                acceptedFiles: "application/pdf",
                 init: function() {
                     if( $('#aceptacion-nombramiento').hasClass('dz-filled') ) {
                         var dropzoneObj = Dropzone.forElement("#aceptacion-nombramiento"),
@@ -922,6 +945,9 @@
             $('#cedula-representante').dropzone({
                 url: '/upload.php',
                 addRemoveLinks: true,
+                autoProcessQueue: false, // Evita la subida automática
+                maxFiles: 1,
+                acceptedFiles: "application/pdf",
                 init: function() {
                     if( $('#cedula-representante').hasClass('dz-filled') ) {
                         var dropzoneObj = Dropzone.forElement("#cedula-representante"),
@@ -935,6 +961,9 @@
             $('#autorizacion-representante').dropzone({
                 url: '/upload.php',
                 addRemoveLinks: true,
+                autoProcessQueue: false, // Evita la subida automática
+                maxFiles: 1,
+                acceptedFiles: "application/pdf",
                 init: function() {
                     if( $('#autorizacion-representante').hasClass('dz-filled') ) {
                         var dropzoneObj = Dropzone.forElement("#autorizacion-representante"),
@@ -1658,9 +1687,156 @@
                     return;
                 }
 
- 
+                // Verificar si ambos archivos están cargados en Dropzone
+                var cedulaFrontalFile = $('#cedula-frontal')[0].dropzone.getAcceptedFiles();
+                var cedulaPosteriorFile = $('#cedula-posterior')[0].dropzone.getAcceptedFiles();
+                var cedulaSelfieFile = $('#cedula-selfie')[0].dropzone.getAcceptedFiles();
+                var rucImageFile = $('#ruc-image')[0].dropzone.getAcceptedFiles();
+                var documentoAdicionalFile = $('#documento-adicional')[0].dropzone.getAcceptedFiles();
+                var constitucionCompaniaFile = $('#constitucion-compania')[0].dropzone.getAcceptedFiles();
+                var nombramientoRepresentanteFile = $('#nombramiento-representante')[0].dropzone.getAcceptedFiles();
+                var aceptacionNombramientoFile = $('#aceptacion-nombramiento')[0].dropzone.getAcceptedFiles();
+                var cedulaRepresentanteFile = $('#cedula-representante')[0].dropzone.getAcceptedFiles();
+                var autorizacionRepresentanteFile = $('#autorizacion-representante')[0].dropzone.getAcceptedFiles();
 
+                // Validación de archivos
+                if (cedulaFrontalFile.length === 0) {
+                    await Swal.fire({
+                        target: document.getElementById('ModalFirma'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe cargar la cédula frontal',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    return;
+                }
+
+                if (cedulaPosteriorFile.length === 0) {
+                    await Swal.fire({
+                        target: document.getElementById('ModalFirma'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe cargar la cédula posterior',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    return;
+                }
+
+                if (cedulaSelfieFile.length === 0) {
+                    await Swal.fire({
+                        target: document.getElementById('ModalFirma'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe cargar la selfie con cédula',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    return;
+                }
+
+                if (rucImageFile.length === 0) {
+                    await Swal.fire({
+                        target: document.getElementById('ModalFirma'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe cargar la Copia del RUC',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    return;
+                }
+
+                if ($('#tipo_solicitud').val() == "2" || $('#tipo_solicitud').val() == "3") {
+                    if (constitucionCompaniaFile.length === 0) {
+                        await Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Debe cargar la Constitución de la Comañía',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        });
+                        return;
+                    }
+
+                    if (nombramientoRepresentanteFile.length === 0) {
+                        await Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Debe cargar el nombramiento del Representante',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        });
+                        return;
+                    }
+
+                    if (aceptacionNombramientoFile.length === 0) {
+                        await Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Debe cargar la aceptación del Nombramiento',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        });
+                        return;
+                    }
+                }
+
+                if ($('#tipo_solicitud').val() == "3") {
+
+                    if (cedulaRepresentanteFile.length === 0) {
+                        await Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Debe cargar la Cédula del Representante Legal',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        });
+                        return;
+                    }
+
+                    if (autorizacionRepresentanteFile.length === 0) {
+                        await Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Debe cargar la autorización del Representante Legal',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        });
+                        return;
+                    }
+
+                }
+
+                // Si los archivos son válidos, proceder con el envío del formulario
                 var formData = new FormData(document.getElementById("ModalFirma"));
+
+                // Agregar los archivos de Dropzone al FormData
+                formData.append('cedula_frontal', cedulaFrontalFile[0]);
+                formData.append('cedula_posterior', cedulaPosteriorFile[0]);  
+                formData.append('cedula_selfie', cedulaSelfieFile[0]);  
+                formData.append('ruc_image', rucImageFile[0]);  
+                formData.append('documento_adicional', documentoAdicionalFile[0]);  
+                formData.append('constitucion_compania', constitucionCompaniaFile[0]);  
+                formData.append('nombramiento_representante', nombramientoRepresentanteFile[0]);  
+                formData.append('aceptacion_nombramiento', aceptacionNombramientoFile[0]);  
+                formData.append('cedula_representante', cedulaRepresentanteFile[0]);  
+                formData.append('autorizacion_representante', autorizacionRepresentanteFile[0]);  
+
+                // Verifica si el checkbox está marcado o no antes de enviar el formulario
+                if (!$('#switch_ruc').prop('checked')) {
+                    // Si no está marcado, asigna un valor vacío o '0' para garantizar que se envíe
+                    formData.append('switch_ruc', '0');
+                } else {
+                    formData.append('switch_ruc', '1'); // Asigna '1' si está marcado
+                }
+
                 //$('#carga').show();
                 Swal.fire({
                     target: document.getElementById('ModalFirma'),
@@ -1684,7 +1860,7 @@
                 }).done(function(res) {
                     //$('#carga').hide();
                     Swal.close();
-                    //alert(res.success); // Mostrar el mensaje de éxito en un alert
+                    // Mostrar el mensaje de éxito en un alert
                     Swal.fire({
                         target: document.getElementById('ModalFirma'),
                         icon: 'success', // Cambiado a 'success' para mostrar un mensaje positivo
@@ -1693,28 +1869,33 @@
                         confirmButtonText: 'Aceptar',
                         allowOutsideClick: false
                     });
-                    //location.reload(); // Recargar la página
+                    // Recargar la página para reflejar los cambios
                     window.location.href = window.location.href.split('?')[0] + '?noCache=' + new Date().getTime();
-                }).fail(function(res) {
-                    $('#carga').hide();
+                }).fail(function(res) { 
 
                     if (res.status === 422) {
                         // Mostrar mensaje de error de validación
-                        let errors = res.responseJSON;
-                        if (errors.error) {
-                            //alert(errors.error); 
-                            Swal.fire({
-                                target: document.getElementById('ModalFirma'),
-                                icon: 'error',
-                                title: 'Error',
-                                text: errors.error,
-                                confirmButtonText: 'Aceptar',
-                                allowOutsideClick: false
-                            });
+                        let errors = res.responseJSON.errors;
+
+                        // Recorre los errores y muestra un mensaje para cada uno
+                        let errorMessage = "";
+                        for (let field in errors) {
+                            if (errors.hasOwnProperty(field)) {
+                                // Agregar los errores de cada campo
+                                errorMessage += errors[field].join(', ') + "\n";
+                            }
                         }
+
+                        Swal.fire({
+                            target: document.getElementById('ModalFirma'),
+                            icon: 'error',
+                            title: 'Error',
+                            text: errorMessage, // Mostrar todos los errores concatenados
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        });
                     } else {
                         // Mostrar mensaje genérico si no se recibió un error específico
-                        //alert("Ocurrió un error al registrar la cámara.");
                         Swal.fire({
                             target: document.getElementById('ModalFirma'),
                             icon: 'error',
@@ -1725,9 +1906,7 @@
                         });
                     }
 
-                    console.log(res
-                        .responseText
-                    ); // Muestra el error completo en la consola para depuración
+                    console.log(res.responseText); // Muestra el error completo en la consola para depuración
                 });
             }); 
 

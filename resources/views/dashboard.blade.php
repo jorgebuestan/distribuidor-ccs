@@ -149,7 +149,7 @@
 				                        </a>                        
 				                    </li>
 									<li>
-				                        <a class="nav-link" href="/firmas">
+				                        <a class="nav-link" href="/administrador/firmas">
 											<i class="bx bx-loader-circle" aria-hidden="true"></i>
 				                            <span>Generar Firmas</span>
 				                        </a>                        

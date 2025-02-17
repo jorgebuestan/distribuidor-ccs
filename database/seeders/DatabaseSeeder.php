@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoSexoSeeder::class); 
         $this->call(TipoSolicitudSeeder::class); 
         $this->call(TipoVigenciaSeeder::class); 
+        $this->call(TipoArchivoSeeder::class); 
         //$this->call(UserSeeder::class);  
     }
 }
