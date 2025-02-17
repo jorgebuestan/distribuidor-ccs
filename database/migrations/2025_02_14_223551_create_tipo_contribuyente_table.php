@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tipo_contribuyente', function (Blueprint $table) {
             $table->id();
+            $table->text('descripcion');
             $table->timestamps();
         });
     }

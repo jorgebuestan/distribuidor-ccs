@@ -18,7 +18,7 @@ class TipoAmbienteSeeder extends Seeder
             'descripcion' => 'PRUEBAS' 
         ]); 
 
-        DB::table('tipo_solicitud')->insert([  
+        DB::table('tipo_ambiente')->insert([  
             'descripcion' => 'PRODUCCIÓN' 
         ]); 
     }

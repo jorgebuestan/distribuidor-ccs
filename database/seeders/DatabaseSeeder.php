@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoSexoSeeder::class); 
         $this->call(TipoSolicitudSeeder::class); 
         $this->call(TipoVigenciaSeeder::class); 
+        $this->call(TipoAmbienteSeeder::class);
+        $this->call(TipoContribuyenteSeeder::class);
+        
         //$this->call(UserSeeder::class);  
     }
 }

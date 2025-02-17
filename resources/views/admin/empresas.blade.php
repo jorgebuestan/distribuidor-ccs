@@ -88,10 +88,22 @@
             border-color: transparent !important;
         }
     </style>
+ 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/i18n/datepicker-es.js"></script>
+<!-- jQuery UI (si es necesario) -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/i18n/datepicker-es.js"></script>
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
     <div class="container">
         <div class="row">
@@ -310,7 +322,7 @@
                                                         <label>Clave Firma Electrónica</label>
                                                         <input type="text" class="form-control"
                                                             name="clave_firma"
-                                                            id="email_comprobante_electronico"
+                                                            id="clave_firma"
                                                             placeholder="Clave para firma electrónica de la empresa">
                                                             <div id="error-correo" style="color: red; display: none;">Ingrese
                                                                 un correo electrónico válido.</div>
@@ -321,7 +333,7 @@
                                                         <label>Firma Electrónica</label>
                                                         <div id="dragDropBox" class = "border p-4 text center">
                                                             <p>Arrastra y suelta tu firma aquí o haz clic para seleccionar un archivo.</p>
-                                                            <input type="file" class="d-none" id="logoFile" name="file">
+                                                            <input type="file" class="d-none" id="firmaFile" name="firmaFile">
                                                             <input type="hidden" name="tipoDocFirma" value="1">
                                                         </div>
                                                     </div>
@@ -329,7 +341,7 @@
 
                                                 <script>
                                                     const dragDropBox = document.getElementById('dragDropBox');
-                                                    const fileInput = document.getElementById('logoFile');
+                                                    const fileInput = document.getElementById('firmaFile');
                                                 
                                                     dragDropBox.addEventListener('click', function() {
                                                         fileInput.click();
@@ -369,18 +381,15 @@
         </form> 
     </div> 
   
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 
     <script>
-        $(document).ready(function() {
+        var $j = jQuery.noConflict();
+        $j(document).ready(function() {
 
             let empresa_selected = null;
             let empresas = [];
+            
             Swal.fire({
                 title: 'Cargando',
                 text: 'Por favor espere',
@@ -391,15 +400,40 @@
                 }
             });
 
-            var table = $('#dataTable').DataTable({
+            var table =  $j('#dataTable').DataTable({
                 destroy: true,
                 processing: false,
                 serverSide: true,
+
+                ajax: {
+                    url: "{{ route('admin.obtener_listado_empresas') }}",
+                    type: "GET",
+                    data: function(d) {
+                        d.start = d.start || 0;
+                        d.length = d.length || 10;
+                    },
+                    error: function(error) {
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'Aceptar',
+                        text: error.responseJSON?.error || "Error al cargar los datos.",
+                        });
+                        console.error("Error al cargar los datos: ", error);
+                    },
+                    complete: function(response) {
+                        empresas = response.responseJSON.data;
+                        Swal.close();
+                    },
+                },
+
                 pageLength: 10,
                 columns: [
-                { data: 'ruc', width: '45%' },
-                { data: 'razon_social', width: '45%' },
-                { data: 'btn', width: '10%' }
+                    { data: 'ruc', width: '45%' },
+                    { data: 'razon_social', width: '45%' },
+                    { data: 'btn', width: '10%' }
                 ],
 
                 order: [[0, "asc"]],
@@ -465,7 +499,8 @@
                 $('#hiddenSelectedItems').val('');
 
             //Manejo de Upercase para el formulario de creación
-
+            });
+            
             $('#razon_social').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
@@ -680,8 +715,40 @@
                     return;
                 }
 
+                if ($('#id_tipo_contribuyente').val() == -1) {
+                    //alert('Debe seleccionar el Tipo de Contribuyente');
+                    await Swal.fire({
+                        target: document.getElementById('ModalEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe seleccionar el Tipo de Contribuyente',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales"]').tab('show');
+                    $('#id_tipo_contribuyente').focus();
+                    return;
+                }
+
+                if ($('#id_ambiente').val() == -1) {
+                    //alert('Debe seleccionar el Tipo de Ambiente');
+                    await Swal.fire({
+                        target: document.getElementById('ModalEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe seleccionar el Tipo de Ambiente',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales"]').tab('show');
+                    $('#id_ambiente').focus();
+                    return;
+                }
+
+                var formData = new FormData(document.getElementById('ModalEmpresa'));
+
                 $.ajax({
-                    url: "",
+                    url: "{{ route('admin.registrar_empresa') }}",
                     type: "POST",
                     data: formData,
                     dataType: "json",
@@ -738,311 +805,11 @@
                 });
             });
 
-            // Delegar el evento de clic al documento para asegurar que funcione con elementos dinámicos
-            $(document).on('click', '.open-modal', function() {
-                console.log('Botón clicado...');
-                var button = $(this);
-                var empresaId = button.data('id');
-
-                console.log('Cargo ID:', empresaId);
-
-                //$('#carga').show();
-                Swal.fire({
-                    title: 'Cargando información de Empresa',
-                    text: 'Por favor espere',
-                    icon: 'info',
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading()
-                    }
-                });
-
-                // **LIMPIAR EL SELECT Y EL INPUT HIDDEN ANTES DE CARGAR DATOS**
-                selectedItemsMod = []; // Vaciar el array de actividades económicas seleccionadas
-                $('#selectedList_mod').empty(); // Vaciar la lista de badges visuales
-                $('#hiddenSelectedItemsMod').val(''); // Limpiar el input hidden
-
-
-                $.ajax({
-                    url: '/administrador/empresa/detalle/' + empresaId,
-                    method: 'GET',
-                    success: function(response) {
-                        empresa_selected = response;
-                        console.log('Datos recibidos:', response);
-
-                        var EmpresaId = $('#empresa_id');
-                        var Ruc = $('#ruc_mod');
-                        var RazonSocial = $('#razon_social_mod');
-                        var ObligadoContabilidad = $('#obligado_contabilidad')
-                        var IdTipoContribuyente = $('#id_tipo_contribuyente')
-                        var Direccion = $('#direccion')
-                        var Telefono = $('#telefono_mod');
-                        var CorreoAdministrativo = $('#email_administrativo_mod');
-                        var CorreoComprobanteElectronico = $('#email_comprobante_electronico')
-                        var ContribuyenteEspecial = $('#contribuyente_especial');
-                        var ClaveFirmaElectronica = $('#clave_firma');
-                        var IdAmbiente = $('#id_ambiente')
-                        var HiddenSelectedItemsMod = $('#hiddenSelectedItemsMod');
-
-                        // Asignación de valores del response a los campos
-                        EmpresaId.val(response.id);
-                        Ruc.val(response.ruc);
-                        RazonSocial.val(response.razon_social);
-                        ObligadoContabilidad.val(response.obligado_contabilidad);
-                        IdTipoContribuyente.val(response.id_tipo_contribuyente);
-                        Direccion.val(response.direccion_representante_legal);
-                        Telefono.val(response.telefono);
-                        CorreoAdministrativo.val(response.email_adminisrativo.toLowerCase());
-                        CorreoComprobanteElectronico.val(response.email_comprobante_electronico).toLowerCase();
-                        ContribuyenteEspecial.val(response.contribuyente_especial);
-                        ClaveFirmaElectronica.val(response.clave_firma_electronica);
-                        IdAmbiente.val(response.id_ambiente);
-
-                        Swal.close();
-                        $('#ModalModificarEmpresa').modal('show');
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Error al momento de Cargar la Empresa',
-                            confirmButtonText: 'Aceptar',
-                            allowOutsideClick: false
-                        });
-                    }
-                });
-            });
-
             $('#btn-close').on('click', function() {
                 // Aquí puedes añadir la lógica para enviar el formulario modificado
                 $('#ModalModificarEmpresa').modal('hide'); // Cerrar el modal después de guardar
             });
 
-            $('#btn-modificar-empresa').on('click', async function() {
-
-                if (!/^\d{13}$/.test($('#ruc_mod').val())) {
-                    $("#error-ruc-mod").show();
-                    await Swal.fire({
-                        target: document.getElementById('ModalModificarEmpresa'),
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'El RUC debe tener 13 dígitos',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
-                    $('#ruc_mod').focus();
-                    return;
-                }
-
-                if ($('#razon_social_mod').val() == "") {
-                    //alert('Debe ingresar la Razón Social');
-                    await Swal.fire({
-                        target: document.getElementById('ModalModificarEmpresa'),
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Debe ingresar la Razón Social',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
-                    $('#razon_social_mod').focus();
-                    return;
-                }
-
-                if ($('#telefono_mod').val() == "") {
-                    //alert('Debe ingresar el Teléfono del Representante Legal');
-                    await Swal.fire({
-                        target: document.getElementById('ModalModificarEmpresa'),
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Debe ingresar el Teléfono de la Empresa',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
-                    $('#telefono_mod').focus();
-                    return;
-                }
-
-
-                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($(
-                        '#correo_adminisrativo_mod').val())) {
-                    /*$("#error-correo").show();
-                    isValid = false;*/
-                    $("#error-correo-mod").show();
-                    //alert('Debe registrar un correo con formato válido');
-                    await Swal.fire({
-                        target: document.getElementById('ModalModificarEmpresa'),
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Debe registrar un correo con formato válido',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
-                    $('#correo_adminisrativo_mod').focus();
-                    return;
-                }
-
-                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($(
-                        '#correo_comprobante_electronico_mod').val())) {
-                    $("#error-correo-mod").show();
-                    await Swal.fire({
-                        target: document.getElementById('ModalModificarEmpresa'),
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Debe registrar un correo con formato válido',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
-                    $('#correo_comprobante_electronico_mod').focus();
-                    return;
-                }
-
-                if ($('#direccion_mod').val() == "") {
-                    //alert('Debe ingresar la Dirección del Representante Legal');
-                    await Swal.fire({
-                        target: document.getElementById('ModalModificarEmpresa'),
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Debe ingresar la Dirección de la empresa',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
-                    $('#direccion_representante_legal_mod').focus();
-                    return;
-                }
-
-                if ($('#clave_firma_mod').val() == "") {
-                    //alert('Debe ingresar la Dirección del Representante Legal');
-                    await Swal.fire({
-                        target: document.getElementById('ModalModificarEmpresa'),
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Debe ingresar la Clave de la Firma Electrónica',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
-                    $('#clave_firma_mod').focus();
-                    return;
-                }
-
-                //$('#carga').show();
-                Swal.fire({
-                    target: document.getElementById('ModalModificarEmpresa'),
-                    title: 'Enviando datos para modificación de Empresa',
-                    text: 'Por favor espere',
-                    icon: 'info',
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading()
-                    }
-                });
-
-                // Aquí puedes añadir la lógica para enviar el formulario modificado
-                var formData = new FormData(document.getElementById("ModalModificarEmpresa"));
-                $.ajax({
-                    url: "",
-                    type: "post",
-                    dataType: "html",
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                }).done(function(res) {
-                    msg = JSON.parse(res).response.msg
-                    Swal.close();
-                    Swal.fire({
-                        icon: 'success', // Cambiado a 'success' para mostrar un mensaje positivo
-                        title: 'Éxito',
-                        text: res.success,
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                    //alert(msg);
-                    //location.reload();
-                    window.location.href = window.location.href.split('?')[0] + '?noCache=' + new Date().getTime();
-                    $('#carga').hide();
-                }).fail(function(res) {
-                    let errorMessage = 'Ocurrió un error inesperado.';
-
-                    // Verifica si la respuesta contiene JSON válido y el campo "error"
-                    if (res.responseJSON && res.responseJSON.error) {
-                        errorMessage = res.responseJSON.error; // Solo el mensaje de error
-                    } else if (res.responseText) {
-                        try {
-                            const response = JSON.parse(res.responseText);
-                            errorMessage = response.error ||
-                                errorMessage; // Si existe, muestra el campo "error"
-                        } catch (e) {
-                            errorMessage = res.responseText; // Texto plano de la respuesta
-                        }
-                    }
-
-                    // Muestra el mensaje de error en SweetAlert
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: errorMessage,
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                });
-                //$('#carga').hide();
-                Swal.close();
-                $('#ModalModificarEmpresa').modal('hide'); // Cerrar el modal después de guardar
-            });
-
-            $('#btn-more-info').on('click', function() {
-                let empresaLogInsert = empresa_selected.insert;
-                let empresaLogUpdate = empresa_selected.update;
-
-                // Manejo del caso cuando empresaLogUpdate es vacío
-                let lastItem = null;
-                if (Array.isArray(empresaLogUpdate) && empresaLogUpdate.length > 0) {
-                    lastItem = empresaLogUpdate[empresaLogUpdate.length - 1];
-                } else {
-                    lastItem = {
-                        created_at: 'No hay modificaciones',
-                        user: {
-                            name: 'N/A'
-                        }
-                    };
-                }
-
-                // Mostrar el modal con SweetAlert2
-                const swalInfo = Swal.fire({
-                    target: document.getElementById('ModalModificarEmpresa'),
-                    title: 'Información adicional',
-                    html: `
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5><strong>Creación</strong></h5>
-                                <p><strong>Usuario:</strong> ${empresaLogInsert.user.name}</p>
-                                <p><strong>Fecha de creación:</strong> ${formattedCreatedAt}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <h5><strong>Última modificación</strong></h5>
-                                <p><strong>Usuario:</strong> ${lastItem?.user?.name}</p>
-                                <p><strong>Fecha de modificación:</strong> ${formattedUpdatedAt}</p>
-                            </div>
-                        </div>
-                    </div>
-                    `,
-                    showCloseButton: true,
-                    showConfirmButton: true,
-                    allowOutsideClick: false,
-                });
-            });
-
-    });
-</script>
+        });
+    </script>
 @endsection

@@ -9,6 +9,6 @@ class TipoContribuyente extends Model
 {
     use HasFactory;
 
-    protected $table = 'tipo_ambiente';
-    protected $fillable = ['nombre'];
+    protected $table = 'tipo_contribuyente';
+    protected $fillable = ['descripcion'];
 }

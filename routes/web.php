@@ -29,8 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
     Route::get('/firmas', [FirmaController::class, 'index'])->name('firmas.index');
+
     Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas.index');
+    Route::get('/obtener_listado_empresas', [EmpresaController::class, 'obtener_listado_empresas'])->name('admin.obtener_listado_empresas');
+    Route::post('/registrar_empresa', [EmpresaController::class, 'registrar_empresa'])->name('admin.registrar_empresa');
 
 });
 
