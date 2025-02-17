@@ -29,9 +29,8 @@ class EmpresaController extends Controller
         return view('admin.empresas', compact('tipo_contribuyente', 'tipo_ambiente'));
     }
 
-    public function obtener_listado_empresas(Request $request)
-
-    {
+    public function obtener_listado_empresas(Request $request){
+        
         $columns = [
             0 => 'empresas.id',
             1 => 'acciones'
@@ -73,22 +72,59 @@ class EmpresaController extends Controller
 
     $empresas = $query->get();
 
+    $data = $empresas->map(function ($empresa) {
+
+        $boton = "";
+
+        return [
+            'id' => $empresa->id,
+            'razon_social' => $empresa->razon_social,
+            'ruc' => $empresa->ruc,
+            'btn' => '<div class="d-flex justify-content-center align-items-center gap-2">' .
+                        '<button class="btn btn-outline-warning mb-3 btn-sm rounded-pill open-modal" data-id="' . $empresa->id . '"><i class="fa-solid fa-pencil"></i>&nbsp;Modificar</button>' .
+                        $boton .
+                        '</div>'   
+        ];
+    });
+
     //pendiente de revisar
     $json_data = [
         'draw' => intval($request->input('draw')),
         'recordsTotal' => DB::table('empresas')->count(),
         'recordsFiltered' => $totalFiltered,
+        "data" => $data
     ];
 
     return response()->json($json_data);
+
     }
     /**
      * Show the form for creating a new resource.
      */
     public function registrar_empresa(Request $request)
     {
+        /*
+        $request->validate([
+            'ruc' => 'required',
+            'razon_social' => 'required',
+            'obligado_contabilidad' => 'required',
+            'id_tipo_contribuyente' => 'required',
+            'direccion' => 'required',
+            'telefono' => 'required',
+            'correo_administrativo' => 'required|email',
+            'contribuyente_especial' => 'required',
+            'correo_comprobante_electronico' => 'required|email',
+            'id_ambiente' => 'required',
+            'clave_firma' => 'required',
+        ]);
+
+        */
+
+        // $data = $request->all();
+
         try {
             $rutaLogo = 'default/default_logo.png';
+            $rutaFirma = 'default/default_firma.png';
 
             if ($request->hasFile('logoFile'))  {
                 $ruc = $request->input('ruc');
@@ -108,11 +144,8 @@ class EmpresaController extends Controller
                 $archivoFirma->storeAs("{$ruc}/firmas/", $nombreArchivo, 'public');
             }
 
-            DB::beginTransaction();
-
             $empresa = Empresa::create([
                 
-                //'id_empresa' => $empresa->id,
                 'logo' => $rutaLogo,
                 'firma' => $rutaFirma,
                 'ruc' => strtoupper($request->input('ruc')),
@@ -121,14 +154,13 @@ class EmpresaController extends Controller
                 'id_tipo_contribuyente' => $request->input('id_tipo_contribuyente'),
                 'direccion' => strtoupper($request->input('direccion')),
                 'telefono' => $request->input('telefono'),
-                'email_administrativo' => $request->input('email_administrativo'),
+                'correo_administrativo' => $request->input('correo_administrativo'),
                 'contribuyente_especial' => $request->input('contribuyente_especial'),
-                'email_comprobante_electronico' => $request->input('email_comprobante_electronico'),
+                'correo_comprobante_electronico' => $request->input('correo_comprobante_electronico'),
                 'id_ambiente' => $request->input('id_ambiente'),
                 'clave_firma' => $request->input('clave_firma'),
             ]);
 
-            DB::commit();
             return response()->json(['success' => true, 'message' => 'Empresa registrada correctamente'], 200);
 
         } catch (\Exception $e){
@@ -178,9 +210,9 @@ class EmpresaController extends Controller
                 'id_tipo_contribuyente' => $request->input('id_tipo_contribuyente_mod'),
                 'direccion' => strtoupper($request->input('direccion_mod')),
                 'telefono' => $request->input('telefono_mod'),
-                'email_administrativo' => $request->input('email_administrativo_mod'),
+                'correo_administrativo' => $request->input('correo_administrativo_mod'),
                 'contribuyente_especial' => $request->input('contribuyente_especial_mod'),
-                'email_comprobante_electronico' => $request->input('email_comprobante_electronico_mod'),
+                'correo_comprobante_electronico' => $request->input('correo_comprobante_electronico_mod'),
                 'id_ambiente' => $request->input('id_ambiente_mod'),
                 'clave_firma' => $request->input('clave_firma_mod'),
             ]);

@@ -19,9 +19,9 @@ return new class extends Migration
             $table->integer('id_tipo_contribuyente');
             $table->text('direccion');
             $table->text('telefono');
-            $table->text('email_administrativo');
+            $table->text('correo_administrativo');
             $table->integer('contribuyente_especial');
-            $table->text('email_comprobante_electronico');
+            $table->text('correo_comprobante_electronico');
             $table->integer('id_ambiente');
             $table->text('firma');
             $table->text('clave_firma');

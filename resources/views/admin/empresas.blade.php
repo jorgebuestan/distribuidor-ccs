@@ -197,12 +197,12 @@
 
         <!-- Jbuestan Modales -->
         <form enctype="multipart/form-data" class="modal fade" id="ModalEmpresa" tabindex="-1"
-            aria-labelledby="ModalEmpresaLabel" aria-hidden="true">
+            aria-labelledby="ModalEmpresa" aria-hidden="true">
             @csrf
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="ModalEmpresaLabel"><b>Agregar una Nueva Empresa</b></h5>
+                        <h5 class="modal-title" id="ModalEmpresaLabel"><b>Modificar Empresa</b></h5>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -244,8 +244,9 @@
                                                         <label>Obligado a llevar contabilidad</label>
                                                         <select id="obligado_contabilidad" name="obligado_contabilidad"
                                                             class="form-control">
-                                                            <option value="1">SI</option>
                                                             <option value="0">NO</option>
+                                                            <option value="1">SI</option>
+                                                            
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 gap-1">
@@ -278,31 +279,32 @@
                                                 </div>
                                                 <div class="row mb-2">
                                                     <div class="col-md-6">
-                                                        <label>Email Contacto Administrativo</label>
+                                                        <label>Correo - Contacto Administrativo</label>
                                                         <input type="text" class="form-control"
-                                                            name="email_administrativo"
-                                                            id="email_administrativo"
+                                                            name="correo_administrativo"
+                                                            id="correo_administrativo"
                                                             placeholder="Email administrativo de la empresa">
-                                                            <div id="error-correo" style="color: red; display: none;">Ingrese
+                                                            <div id="error-correo-administrativo" style="color: red; display: none;">Ingrese
                                                                 un correo electrónico válido.</div>
                                                     </div>
                                                     <div class="col-md-6 gap-1">
                                                         <label>Contribuyente Especial</label>
                                                         <select id="contribuyente_especial" name="contribuyente_especial"
                                                             class="form-control">
-                                                            <option value="1">SI</option>
                                                             <option value="0">NO</option>
+                                                            <option value="1">SI</option>
+                                                            
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-2">
                                                     <div class="col-md-6">
-                                                        <label>Email Comprobantes Electrónicos</label>
+                                                        <label>Correo - Comprobantes Electrónicos</label>
                                                         <input type="text" class="form-control"
-                                                            name="email_comprobante_electronico"
-                                                            id="email_comprobante_electronico"
+                                                            name="correo_comprobante_electronico"
+                                                            id="correo_comprobante_electronico"
                                                             placeholder="Email para generar los comprobantes elecrónicos de la empresa">
-                                                            <div id="error-correo" style="color: red; display: none;">Ingrese
+                                                            <div id="error-correo-comprobante-electronico" style="color: red; display: none;">Ingrese
                                                                 un correo electrónico válido.</div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -324,7 +326,7 @@
                                                             name="clave_firma"
                                                             id="clave_firma"
                                                             placeholder="Clave para firma electrónica de la empresa">
-                                                            <div id="error-correo" style="color: red; display: none;">Ingrese
+                                                            <div id="error-clave-firma" style="color: red; display: none;">Ingrese
                                                                 un correo electrónico válido.</div>
                                                     </div>
                                                 </div>
@@ -379,13 +381,201 @@
                 </div>
             </div>
         </form> 
+
+        <form enctype="multipart/form-data" class="modal fade" id="ModalModificarEmpresa" tabindex="-1"
+            aria-labelledby="ModalModificarEmpresaLabel" aria-hidden="true">
+            @csrf
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalModificarEmpresaLabel"><b>Modificar Empresa</b></h5>
+                        <button type="button" class="btn btn-warning" id="btn-more-info">
+                            <i class="fas fa-info"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="tabs">
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item active">
+                                                <a class="nav-link" data-bs-target="#datos_generales_mod"
+                                                    href="#datos_generales_mod" data-bs-toggle="tab">Datos Generales</a>
+                                            </li> 
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div id="datos_generales_mod" class="tab-pane active">
+                                                <div class="row mb-2">
+                                                    <div class="col-md-12">
+                                                        <label for="logoFile" class="btn btn-primary w-100">Subir Logo</label>
+                                                        <input type="file" class="form-control-file d-none" name="logoFile_mod" id="logoFile_mod">
+                                                        <input type="hidden" name="tipoDocFirma_mod" value="1">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 gap-1">
+                                                        <label>RUC</label>
+                                                        <input type="text" class="form-control" name="ruc_mod"
+                                                            id="ruc_mod" placeholder="RUC de la Empresa">
+                                                        <div id="error-ruc-mod" style="color: red; display: none;">El RUC debe
+                                                            tener
+                                                            13 dígitos.</div>
+                                                    </div>
+                                                    <div class="col-md-6 gap-1">
+                                                        <label>Razón Social</label>
+                                                        <input type="text" class="form-control" name="razon_social_mod"
+                                                            id="razon_social_mod" placeholder="Razón Social">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 gap-1">
+                                                        <label>Obligado a llevar contabilidad</label>
+                                                        <select id="obligado_contabilidad_mod" name="obligado_contabilidad_mod"
+                                                            class="form-control">
+                                                            <option value="0">NO</option>
+                                                            <option value="1">SI</option>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 gap-1">
+                                                        <label>Tipo de Contribuyente</label>
+                                                        <select id="id_tipo_contribuyente_mod" name="id_tipo_contribuyente_mod"
+                                                            class="form-control populate">
+                                                            <option value=-1>Seleccionar</option>
+                                                            @foreach ($tipo_contribuyente as $id => $descripcion)
+                                                                <option value={{$id}}>{{$descripcion}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6 gap-1">
+                                                        <label>Direccion</label>
+                                                        <input type="text" class="form-control"
+                                                            name="direccion_mod"
+                                                            id="direccion_mod"
+                                                            placeholder="Dirección de la empresa">
+                                                    </div>
+                                                    <div class="col-md-6 gap-1">
+                                                        <label>Teléfono</label>
+                                                        <input type="text" class="form-control"
+                                                            name="telefono_mod"
+                                                            id="telefono_mod"
+                                                            placeholder="Teléfono de la empresa">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6">
+                                                        <label>Correo - Contacto Administrativo</label>
+                                                        <input type="text" class="form-control"
+                                                            name="correo_administrativo_mod"
+                                                            id="correo_administrativo_mod"
+                                                            placeholder="Email administrativo de la empresa">
+                                                            <div id="error-correo-administrativo-mod" style="color: red; display: none;">Ingrese
+                                                                un correo electrónico válido.</div>
+                                                    </div>
+                                                    <div class="col-md-6 gap-1">
+                                                        <label>Contribuyente Especial</label>
+                                                        <select id="contribuyente_especial_mod" name="contribuyente_especial_mod"
+                                                            class="form-control">
+                                                            <option value="0">NO</option>
+                                                            <option value="1">SI</option>
+                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6">
+                                                        <label>Correo - Comprobantes Electrónicos</label>
+                                                        <input type="text" class="form-control"
+                                                            name="correo_comprobante_electronico_mod"
+                                                            id="correo_comprobante_electronico_mod"
+                                                            placeholder="Email para generar los comprobantes elecrónicos de la empresa">
+                                                            <div id="error-correo-comprobante-electronico-mod" style="color: red; display: none;">Ingrese
+                                                                un correo electrónico válido.</div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>Tipo de Ambiente</label>
+                                                        <select id="id_ambiente_mod" name="id_ambiente_mod"
+                                                            class="form-control populate">
+                                                            <option value=-1>Seleccionar</option>
+                                                            @foreach ($tipo_ambiente as $id => $descripcion)
+                                                                <option value={{$id}}>{{$descripcion}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-6">
+                                                        <label>Clave Firma Electrónica</label>
+                                                        <input type="text" class="form-control"
+                                                            name="clave_firma_mod"
+                                                            id="clave_firma_mod"
+                                                            placeholder="Clave para firma electrónica de la empresa">
+                                                            <div id="error-clave-firma-mod" style="color: red; display: none;">Ingrese
+                                                                un correo electrónico válido.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2">
+                                                    <div class="col-md-12">
+                                                        <label>Firma Electrónica</label>
+                                                        <div id="dragDropBox" class = "border p-4 text center">
+                                                            <p>Arrastra y suelta tu firma aquí o haz clic para seleccionar un archivo.</p>
+                                                            <input type="file" class="d-none" id="firmaFile_mod" name="firmaFile_mod">
+                                                            <input type="hidden" name="tipoDocFirma_mod" value="1">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+                                                    const dragDropBox = document.getElementById('dragDropBox');
+                                                    const fileInput = document.getElementById('firmaFile_mod');
+                                                
+                                                    dragDropBox.addEventListener('click', function() {
+                                                        fileInput.click();
+                                                    });
+                                                
+                                                    dragDropBox.addEventListener('dragover', function(e) {
+                                                        e.preventDefault();
+                                                        dragDropBox.style.backgroundColor = '#f0f0f0'; // Cambio de color al arrastrar
+                                                    });
+                                                
+                                                    dragDropBox.addEventListener('dragleave', function() {
+                                                        dragDropBox.style.backgroundColor = ''; // Vuelve al color original
+                                                    });
+                                                
+                                                    dragDropBox.addEventListener('drop', function(e) {
+                                                        e.preventDefault();
+                                                        dragDropBox.style.backgroundColor = ''; // Vuelve al color original
+                                                        const files = e.dataTransfer.files;
+                                                        if (files.length > 0) {
+                                                            fileInput.files = files; // Asigna los archivos seleccionados al input
+                                                        }
+                                                    });
+
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="btn-close" data-dismiss="modal">Cerrar</button>&nbsp;
+                        <button type="button" class="btn btn-primary" id="btn-modificar-empresa">Guardar cambios</button>
+                    </div>
+                </div>
+            </div>
+        </form> 
     </div> 
   
     
 
     <script>
-        var $j = jQuery.noConflict();
-        $j(document).ready(function() {
+        $(document).ready(function() {
 
             let empresa_selected = null;
             let empresas = [];
@@ -400,7 +590,7 @@
                 }
             });
 
-            var table =  $j('#dataTable').DataTable({
+            var table =  $('#dataTable').DataTable({
                 destroy: true,
                 processing: false,
                 serverSide: true,
@@ -431,9 +621,9 @@
 
                 pageLength: 10,
                 columns: [
-                    { data: 'ruc', width: '45%' },
-                    { data: 'razon_social', width: '45%' },
-                    { data: 'btn', width: '10%' }
+                    { data: 'ruc', width: '15%' },
+                    { data: 'razon_social', width: '67%' },
+                    { data: 'btn', width: '12%' }
                 ],
 
                 order: [[0, "asc"]],
@@ -446,62 +636,39 @@
                 },
             });
 
-            function syncHiddenInput() {
-                $('#hiddenSelectedItems').val(selectedItems.join(',')); // Actualizar el campo oculto
-                console.log('Contenido actualizado de selectedItems:', selectedItems);
+            $('#tipo_contribuyente').on('change', function() {
+                const value = $(this).val();
+
+                if(value == '1'){
+                    $('#regimen_general').show();
+                    $('#rimpe_emprendedor').hide();
+                    $('#rimple_negocio_popular').hide();
+                
+                }else if(value == '2'){
+                    $('#regimen_general').hide();
+                    $('#rimpe_emprendedor').show();
+                    $('#rimple_negocio_popular').hide();
+
+                }else if(value == '3'){
+                    $('#regimen_general').hide();
+                    $('#rimpe_emprendedor').hide();
+                    $('#rimple_negocio_popular').show();
+                }else{
+                    $('#regimen_general').hide();
+                    $('#rimpe_emprendedor').hide();
+                    $('#rimple_negocio_popular').hide();
+                }
             }
+        );
 
-            let selectedItems = [];
+        // Manejo de Uppercase y Lowercase en campos de texto
 
-            // Manejar eliminación de elementos seleccionados (badge)
-            $('#selectedList').on('click', '.remove-item', function() {
-                const badge = $(this).closest('.selected-item');
-                const id = badge.data('id'); // Convertir a cadena
-
-                // Eliminar el ID del array
-                selectedItems = selectedItems.filter(item => item !== id);
-                console.log(`Eliminado del array: ${id}, Nuevo contenido: ${selectedItems}`); // Depuración
-
-                // Eliminar visualmente el badge
-                badge.remove();
-
-                // Restaurar la opción en el dropdown
-                const optionElement = $(`#actividad_economica option[value=${id}]`);
-                optionElement.prop('disabled', false).prop('selected', false);
-
-                syncHiddenInput(); // Sincronizar el campo oculto
-            });
-
-            function syncHiddenInputMod() {
-                $('#hiddenSelectedItemsMod').val(selectedItemsMod.join(',')); // Actualizar el campo oculto
-                console.log('Contenido actualizado de selectedItemsMod:', selectedItemsMod);
-            }
-
-            let selectedItemsMod = [];
-
-            $('#ModalEmpresa').on('show.bs.modal', function() {
-                // Reiniciar el array de ítems seleccionados
-                selectedItems = [];
-
-                // Limpiar lista de badges y el campo oculto
-                $('#selectedList').empty();
-                $('#hiddenSelectedItems').val('');
-
-                // Limpiar completamente el select, establecer en blanco
-                console.log('Modal abierto, campos limpios');
-            });
-
-            $('#ModalEmpresa').on('hidden.bs.modal', function() {
-                selectedItems = [];
-
-                // Limpiar lista de badges y el campo oculto
-                $('#selectedList').empty();
-                $('#hiddenSelectedItems').val('');
-
-            //Manejo de Upercase para el formulario de creación
-            });
-            
             $('#razon_social').on('input', function() {
+                // Convierte el valor del campo a mayúsculas
+                $(this).val($(this).val().toUpperCase());
+            });
+
+            $('#razon_social_mod').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
@@ -511,12 +678,27 @@
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#email_administrativo').on('input', function() {
+            $('#direccion_mod').on('input', function() {
+                // Convierte el valor del campo a mayúsculas
+                $(this).val($(this).val().toUpperCase());
+            });
+
+            $('#correo_administrativo').on('input', function() {
                 // Convierte el valor del campo a minúscula
                 $(this).val($(this).val().toLowerCase());
             });
 
-            $('#email_comprobante_electronico').on('input', function() {
+            $('#correo_administrativo_mod').on('input', function() {
+                // Convierte el valor del campo a minúscula
+                $(this).val($(this).val().toLowerCase());
+            });
+
+            $('#correo_comprobante_electronico').on('input', function() {
+                // Convierte el valor del campo a minúscula
+                $(this).val($(this).val().toLowerCase());
+            });
+
+            $('#correo_comprobante_electronico_mod').on('input', function() {
                 // Convierte el valor del campo a minúscula
                 $(this).val($(this).val().toLowerCase());
             });
@@ -533,7 +715,19 @@
                 $(this).val(value);
             });
 
-            // Validación de valores en el formulario de creación y edición
+            $('#telefono_mod').on('input', function() {
+                let value = $(this).val();
+                // Eliminar todos los caracteres no numéricos excepto el guion
+                value = value.replace(/[^0-9]/g, '');
+                
+                // Limitar el campo a un máximo de 11 caracteres (10 dígitos + 1 guion)
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+                $(this).val(value);
+            });
+
+        // Validación de valores en el formulario de creación y edición
 
             // Validar campo RUC
             $("#ruc").on("input", function() {
@@ -561,9 +755,9 @@
                 var regexCorreo =
                     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Regex para correo válido
                 if (regexCorreo.test(correo)) { // Si es un correo válido
-                    $("#error-correo").hide(); // Ocultar error
+                    $("#error-correo-administrativo").hide(); // Ocultar error
                 } else {
-                    $("#error-correo").show(); // Mostrar error
+                    $("#error-correo-administrativo").show(); // Mostrar error
                 }
             });
 
@@ -573,9 +767,9 @@
                 var regexCorreo =
                     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Regex para correo válido
                 if (regexCorreo.test(correo)) { // Si es un correo válido
-                    $("#error-correo-mod").hide(); // Ocultar error
+                    $("#error-correo-administrativo-mod").hide(); // Ocultar error
                 } else {
-                    $("#error-correo-mod").show(); // Mostrar error
+                    $("#error-correo-administrativo-mod").show(); // Mostrar error
                 }
             });
 
@@ -586,9 +780,9 @@
                 var regexCorreo =
                     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Regex para correo válido
                 if (regexCorreo.test(correo)) { // Si es un correo válido
-                    $("#error-correo").hide(); // Ocultar error
+                    $("#error-correo-comprobante-electronico").hide(); // Ocultar error
                 } else {
-                    $("#error-correo").show(); // Mostrar error
+                    $("#error-correo-comprobante-electronico").show(); // Mostrar error
                 }
             });
 
@@ -598,9 +792,9 @@
                 var regexCorreo =
                     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Regex para correo válido
                 if (regexCorreo.test(correo)) { // Si es un correo válido
-                    $("#error-correo-mod").hide(); // Ocultar error
+                    $("#error-correo-comprobante-electronico-mod").hide(); // Ocultar error
                 } else {
-                    $("#error-correo-mod").show(); // Mostrar error
+                    $("#error-correo-comprobante-electronico-mod").show(); // Mostrar error
                 }
             });
 
@@ -638,6 +832,36 @@
                     return;
                 }
 
+                if ($('#id_tipo_contribuyente').val() == -1) {
+                    //alert('Debe seleccionar el Tipo de Contribuyente');
+                    await Swal.fire({
+                        target: document.getElementById('ModalEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe seleccionar el Tipo de Contribuyente',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales"]').tab('show');
+                    $('#id_tipo_contribuyente').focus();
+                    return;
+                }
+                
+                if ($('#direccion').val() == "") {
+                    //alert('Debe ingresar la Dirección del Representante Legal');
+                    await Swal.fire({
+                        target: document.getElementById('ModalEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe ingresar la Dirección de la Empresa',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales"]').tab('show');
+                    $('#direccion').focus();
+                    return;
+                }
+
                 if ($('#telefono').val() == "") {
                     await Swal.fire({
                         target: document.getElementById('ModalEmpresa'),
@@ -652,18 +876,18 @@
                     return;
                 }
 
-
                 if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($(
                         '#correo_administrativo').val())) {
-                    $("#error-correo").show();
+                    $("#error-correo-administrativo").show();
                     await Swal.fire({
                         target: document.getElementById('ModalEmpresa'),
                         icon: 'error',
                         title: 'Error',
-                        text: 'Debe registrar un correo con formato válido',
+                        text: 'Debe registrar un correo administrativo con formato válido',
                         confirmButtonText: 'Aceptar',
                         allowOutsideClick: false
                     });
+
                     $('.nav-tabs a[href="#datos_generales"]').tab('show');
                     $('#correo_administrativo').focus();
                     return;
@@ -671,7 +895,7 @@
 
                 if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($(
                         '#correo_comprobante_electronico').val())) {
-                    $("#error-correo").show();
+                    $("#error-correo-comprobante-electronico").show();
                     await Swal.fire({
                         target: document.getElementById('ModalEmpresa'),
                         icon: 'error',
@@ -680,23 +904,25 @@
                         confirmButtonText: 'Aceptar',
                         allowOutsideClick: false
                     });
+
                     $('.nav-tabs a[href="#datos_generales"]').tab('show');
                     $('#correo_comprobante_electronico').focus();
                     return;
                 }
 
-                if ($('#direccion').val() == "") {
-                    //alert('Debe ingresar la Dirección del Representante Legal');
+                
+                if ($('#id_ambiente').val() == -1) {
+                    //alert('Debe seleccionar el Tipo de Ambiente');
                     await Swal.fire({
                         target: document.getElementById('ModalEmpresa'),
                         icon: 'error',
                         title: 'Error',
-                        text: 'Debe ingresar la Dirección de la Empresa',
+                        text: 'Debe seleccionar el Tipo de Ambiente',
                         confirmButtonText: 'Aceptar',
                         allowOutsideClick: false
                     });
                     $('.nav-tabs a[href="#datos_generales"]').tab('show');
-                    $('#direccion').focus();
+                    $('#id_ambiente').focus();
                     return;
                 }
 
@@ -715,37 +941,18 @@
                     return;
                 }
 
-                if ($('#id_tipo_contribuyente').val() == -1) {
-                    //alert('Debe seleccionar el Tipo de Contribuyente');
-                    await Swal.fire({
-                        target: document.getElementById('ModalEmpresa'),
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Debe seleccionar el Tipo de Contribuyente',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_generales"]').tab('show');
-                    $('#id_tipo_contribuyente').focus();
-                    return;
-                }
-
-                if ($('#id_ambiente').val() == -1) {
-                    //alert('Debe seleccionar el Tipo de Ambiente');
-                    await Swal.fire({
-                        target: document.getElementById('ModalEmpresa'),
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Debe seleccionar el Tipo de Ambiente',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false
-                    });
-                    $('.nav-tabs a[href="#datos_generales"]').tab('show');
-                    $('#id_ambiente').focus();
-                    return;
-                }
-
                 var formData = new FormData(document.getElementById('ModalEmpresa'));
+
+                Swal.fire({
+                    target: document.getElementById('ModalEmpresa'),
+                    title: 'Enviando datos para registro de Empresa ',
+                    text: 'Por favor espere',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
 
                 $.ajax({
                     url: "{{ route('admin.registrar_empresa') }}",
@@ -805,11 +1012,502 @@
                 });
             });
 
+            /*
+            $(document).on('click', '.open-modal', function() {
+                console.log('Botón clicado...');
+                var button = $(this);
+                var camaraId = button.data('id');
+
+                //$('#carga').show();
+                Swal.fire({
+                    title: 'Cargando información de Empresa',
+                    text: 'Por favor espere',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
+
+                $.ajax({
+                    url: '/administrador/camara/detalle/' + camaraId,
+                    method: 'GET',
+                    success: function(response) {
+                        camara_selected = response;
+                        console.log('Datos recibidos:', response);
+
+                        var CamaraId = $('#camara_id');
+                        var FechaIngreso = $('#fecha_ingreso_mod');
+                        var Ruc = $('#ruc_mod');
+                        var RazonSocial = $('#razon_social_mod');
+                        var Cedula = $('#cedula_representante_legal_mod');
+                        var Nombres = $('#nombres_representante_legal_mod');
+                        var Apellidos = $('#apellidos_representante_legal_mod');
+                        var Telefono = $('#telefono_representante_legal_mod');
+                        var Correo = $('#correo_representante_legal_mod');
+                        var Cargo = $('#cargo_representante_legal_mod');
+                        var Direccion = $('#direccion_representante_legal_mod');
+
+                        var TipoRegimen = $('#tipo_regimen_mod');
+                        var FechaRegistro = $('#fecha_registro_mod');
+                        var FechaConstitucion = $('#fecha_constitucion_mod');
+                        var AgenteRetencion = $('#agente_retencion_mod');
+                        var ContribuyenteEspecial = $('#contribuyente_especial_mod');
+                        var Pais = $('#pais_mod');
+                        var Provincia = $('#provincia_mod');
+                        var Canton = $('#canton_mod');
+                        var Parroquia = $('#parroquia_mod');
+                        var Calle = $('#calle_mod');
+                        var Manzana = $('#manzana_mod');
+                        var Numero = $('#numero_mod');
+                        var Interseccion = $('#interseccion_mod');
+                        var Referencia = $('#referencia_mod');
+                        var ActividadEconomica = $('#actividad_economica_mod');
+                        var HiddenSelectedItemsMod = $('#hiddenSelectedItemsMod');
+
+                        //console.log('Elemento Cargo encontrado:', CargoInput.length); // Verificar que el elemento se encuentra
+                        //console.log('Elemento cargo_id encontrado:', camaraIdInput.length); // Verificar que el elemento se encuentra
+
+                        CamaraId.val(response.id);
+                        //FechaIngreso.val(response.fecha_ingreso); 
+                        FechaIngreso.val(convertirFecha(response.fecha_ingreso));
+                        Ruc.val(response.ruc);
+                        RazonSocial.val(response.razon_social);
+                        Cedula.val(response.cedula_representante_legal);
+                        Nombres.val(response.nombres_representante_legal);
+                        Apellidos.val(response.apellidos_representante_legal);
+                        Telefono.val(response.telefono_representante_legal);
+                        //Correo.val(response.correo_representante_legal);
+                        Correo.val(response.correo_representante_legal.toLowerCase());
+                        Cargo.val(response.cargo_representante_legal);
+                        Direccion.val(response.direccion_representante_legal);
+
+                        TipoRegimen.val(response.dato_tributario.tipo_regimen);
+
+                        $('#abiertos-count').text(response.establecimientos?.estado_1 || 0);
+                        $('#cerrados-count').text(response.establecimientos?.estado_2 || 0);
+                        //FechaRegistro.val(response.dato_tributario.fecha_registro_sri); 
+                        //FechaRegistro.val(convertirFecha(response.dato_tributario.fecha_registro_sri));
+
+                        //alert (response.dato_tributario.fecha_registro_sri);
+                        // Manejo de la fecha de registro
+                        const fechaISO = response.dato_tributario
+                            .fecha_registro_sri; // Por ejemplo, '2008-01-22'
+                        const fechaConvertida = convertirFecha(fechaISO);
+
+                        // Convertir la fecha al formato necesario para `Date`
+                        const fechaObj = convertirFechaAObjetoDate(
+                            fechaConvertida); // Convertir de DD/MM/YYYY a Date
+
+                        if (!isNaN(fechaObj.getTime())) {
+                            $('#fecha_registro_mod').datepicker('setDate',
+                                fechaObj); // Asigna la fecha
+                        } else {
+                            console.error("Fecha no válida:", fechaConvertida);
+                        }
+
+                        var logoFullPath = "{{ asset('storage') }}/" + response.logo;
+
+                        $('#image-link').attr('href', logoFullPath); // Cambia el href del enlace
+                        $('#image-preview').attr('src', logoFullPath); // Cambia el src de la imagen
+
+                        // Manejo de la fecha de constitución
+                        const fechaISO2 = response.dato_tributario
+                            .fecha_constitucion; // Por ejemplo, '2008-01-22'
+                        const fechaConvertida2 = convertirFecha(fechaISO2);
+
+                        const fechaObj2 = convertirFechaAObjetoDate(fechaConvertida2);
+
+                        if (!isNaN(fechaObj2.getTime())) {
+                            $('#fecha_constitucion_mod').datepicker('setDate',
+                                fechaObj2); // Asigna la fecha
+                        } else {
+                            console.error("Fecha no válida:", fechaConvertida2);
+                        }
+
+                        // Calcular años y meses
+                        var hoy = new Date();
+                        var FechaConstitucion = $('#fecha_constitucion_mod').val();
+                        var FechaConstitucionDate = convertirFechaAObjetoDate(
+                            FechaConstitucion);
+
+                        if (!isNaN(FechaConstitucionDate.getTime())) {
+                            var years = hoy.getFullYear() - FechaConstitucionDate.getFullYear();
+                            var months = hoy.getMonth() - FechaConstitucionDate.getMonth();
+
+                            if (months < 0) {
+                                years--;
+                                months += 12;
+                            }
+
+                            console.log(`${years} años, ${months} meses`);
+                        } else {
+                            console.error("Fecha de constitución no válida.");
+                        }
+
+                        // Función auxiliar para convertir DD/MM/YYYY a Date
+                        function convertirFechaAObjetoDate(fecha) {
+                            if (!fecha) return new Date(
+                                'Invalid Date'); // Retorna fecha inválida si la entrada es nula
+                            const partes = fecha.split('/'); // Divide por barra
+                            return new Date(partes[2], partes[1] - 1, partes[
+                                0]); // Formato DD/MM/YYYY
+                        }
+
+                        $('#anios_creacion_mod').val(years + ' años, ' + months + ' meses');
+
+                        AgenteRetencion.val(response.dato_tributario.agente_retencion);
+                        ContribuyenteEspecial.val(response.dato_tributario
+                            .contribuyente_especial);
+                        Pais.val(response.dato_tributario.id_pais);
+                        Provincia.val(response.dato_tributario.id_provincia);
+                        Canton.val(response.dato_tributario.id_canton);
+                        Parroquia.val(response.dato_tributario.id_parroquia);
+
+                        // Asignar país y disparar cambio para cargar provincias
+                        $('#pais_mod').val(response.dato_tributario.id_pais).trigger('change');
+
+                        // Cargar provincias y asignar provincia
+                        cargarProvincias(response.dato_tributario.id_pais).then(() => {
+                            $('#provincia_mod').val(response.dato_tributario
+                                .id_provincia).trigger('change');
+
+                            // Cargar cantones y asignar cantón
+                            cargarCantones(response.dato_tributario.id_pais, response
+                                .dato_tributario.id_provincia).then(() => {
+                                $('#canton_mod').val(response.dato_tributario
+                                    .id_canton).trigger('change');
+
+                                // Cargar parroquias y asignar parroquia
+                                cargarParroquias(
+                                    response.dato_tributario.id_pais,
+                                    response.dato_tributario.id_provincia,
+                                    response.dato_tributario.id_canton
+                                ).then(() => {
+                                    $('#parroquia_mod').val(response
+                                        .dato_tributario
+                                        .id_parroquia);
+                                });
+                            });
+                        });
+
+                        Calle.val(response.dato_tributario.calle);
+                        Manzana.val(response.dato_tributario.manzana);
+                        Numero.val(response.dato_tributario.numero);
+                        Interseccion.val(response.dato_tributario.interseccion);
+                        Referencia.val(response.dato_tributario.referencia);
+
+                        // Limpia la lista visual y el array
+                        selectedItemsMod = [];
+                        $('#selectedList_mod').empty();
+
+                        console.log(response.dato_tributario.actividades_economicas);
+
+                        // Verifica si response.dato_tributario y response.dato_tributario.actividades_economicas tienen valores
+                        if (response.dato_tributario && response.dato_tributario
+                            .actividades_economicas) {
+                            // Decodifica el JSON si es necesario
+                            let actividadesEconomicas = response.dato_tributario
+                                .actividades_economicas;
+
+                            // Verifica si es un string y necesita ser decodificado
+                            if (typeof actividadesEconomicas === 'string') {
+                                try {
+                                    actividadesEconomicas = JSON.parse(actividadesEconomicas);
+                                    console.log(actividadesEconomicas);
+                                } catch (error) {
+                                    console.error(
+                                        "Error al decodificar actividades_economicas:",
+                                        error);
+                                    actividadesEconomicas = [];
+                                }
+                            }
+
+                            // Asegúrate de que ahora sea un array
+                            if (Array.isArray(actividadesEconomicas) && actividadesEconomicas
+                                .length > 0) {
+                                console.log("Actividades económicas recibidas:",
+                                    actividadesEconomicas);
+
+                                actividadesEconomicas.forEach(function(id) {
+                                    id = parseInt(
+                                        id); // Asegúrate de que el ID es un entero
+
+                                    // Obtener el texto de la opción seleccionada
+                                    var optionText = $(
+                                        `#actividad_economica_mod option[value=${id}]`
+                                    ).text();
+
+                                    // Añadir ID al array de elementos seleccionados
+                                    console.log('ID:', id);
+                                    console.log(typeof id);
+                                    selectedItemsMod.push(id);
+
+                                    // Añadir el badge visualmente en la lista
+                                    $('#selectedList_mod').append(`
+                                    <span class="badge bg-primary me-2 selected-item" data-id=${id}>
+                                        ${optionText} <span class="remove-item" style="cursor: pointer;">&times;</span>
+                                    </span>
+                                `);
+
+                                    // Marcar la opción como seleccionada
+                                    $(`#actividad_economica_mod option[value=${id}]`)
+                                        .prop('selected', true);
+                                });
+
+                                // Actualiza el input oculto para sincronizar
+                                syncHiddenInputMod();
+
+                                // Activa Select2 y muestra los valores seleccionados
+                                $('#actividad_economica_mod').val(null).trigger('change');
+                            } else {
+                                console.warn(
+                                    "No se recibieron actividades económicas o el array está vacío."
+                                );
+                            }
+                        } else {
+                            console.warn(
+                                "No se encontraron actividades económicas en dato_tributario."
+                            );
+                        }
+
+
+                        //console.log('Valor cargo_id:', camaraIdInput.val()); // Verificar que el valor se asigna
+                        //console.log('Valor cargoname:', CargoInput.val()); // Verificar que el valor se asigna 
+
+                        //$('#carga').hide();
+                        Swal.close();
+                        $('#ModalModificarCamara').modal('show');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Error al momento de Cargar la Cámara',
+                            confirmButtonText: 'Aceptar',
+                            allowOutsideClick: false
+                        });
+                    }
+                });
+            });
+            */
+
             $('#btn-close').on('click', function() {
                 // Aquí puedes añadir la lógica para enviar el formulario modificado
                 $('#ModalModificarEmpresa').modal('hide'); // Cerrar el modal después de guardar
             });
 
+            $("#btn-modificar-empresa").on('click', async function() {
+
+                $('#ModalModificarCamara').modal('show');
+
+                if (!/^\d{13}$/.test($('#ruc_mod').val())) {
+                    /*$("#error-ruc").show();
+                    isValid = false;*/
+                    $("#error-ruc-mod").show();
+                    //alert('El RUC debe tener 13 dígitos');
+                    await Swal.fire({
+                        target: document.getElementById('ModalModificarEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'El RUC debe tener 13 dígitos',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
+                    $('#ruc_mod').focus();
+                    return;
+                }
+
+                if ($('#razon_social_mod').val() == "") {
+                    await Swal.fire({
+                        target: document.getElementById('ModalModificarEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe ingresar la Razón Social',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
+                    $('#razon_social_mod').focus();
+                    return;
+                }
+
+                if ($('#id_tipo_contribuyente_mod').val() == -1) {
+                    //alert('Debe seleccionar el Tipo de Contribuyente');
+                    await Swal.fire({
+                        target: document.getElementById('ModalModificarEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe seleccionar el Tipo de Contribuyente',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
+                    $('#id_tipo_contribuyente_mod').focus();
+                    return;
+                }
+
+                if ($('#direccion_mod').val() == "") {
+                    //alert('Debe ingresar la Dirección del Representante Legal');
+                    await Swal.fire({
+                        target: document.getElementById('ModalModificarEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe ingresar la Dirección de la Empresa',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
+                    $('#direccion_mod').focus();
+                    return;
+                }
+
+                if ($('#telefono_mod').val() == "") {
+                    await Swal.fire({
+                        target: document.getElementById('ModalModificarEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe ingresar el Teléfono de la Empresa',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
+                    $('#telefono_mod').focus();
+                    return;
+                }
+
+                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($(
+                        '#correo_administrativo_mod').val())) {
+                    $("#error-correo-administrativo-mod").show();
+                    await Swal.fire({
+                        target: document.getElementById('ModalModificarEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe registrar un correo administrativo con formato válido',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+
+                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
+                    $('#correo_administrativo_mod').focus();
+                    return;
+                }
+
+                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($(
+                        '#correo_comprobante_electronico_mod').val())) {
+                    $("#error-correo-comprobante-electronico-mod").show();
+                    await Swal.fire({
+                        target: document.getElementById('ModalModificarEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe registrar un correo con formato válido',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+
+                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
+                    $('#correo_comprobante_electronico_mod').focus();
+                    return;
+                }
+
+
+                if ($('#id_ambiente_mod').val() == -1) {
+                    //alert('Debe seleccionar el Tipo de Ambiente');
+                    await Swal.fire({
+                        target: document.getElementById('ModalModificarEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe seleccionar el Tipo de Ambiente',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
+                    $('#id_ambiente_mod').focus();
+                    return;
+                }
+
+                if ($('#clave_firma_mod').val() == "") {
+                    //alert('Debe ingresar la Dirección del Representante Legal');
+                    await Swal.fire({
+                        target: document.getElementById('ModalModificarEmpresa'),
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debe ingresar la Clave de la Firma Electrónica',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    $('.nav-tabs a[href="#datos_generales_mod"]').tab('show');
+                    $('#clave_firma_mod').focus();
+                    return;
+                }
+
+                var formData = new FormData(document.getElementById('ModalModificarEmpresa'));
+
+                Swal.fire({
+                    target: document.getElementById('ModalModificarEmpresa'),
+                    title: 'Enviando datos para la modificación de la Empresa ',
+                    text: 'Por favor espere',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
+
+                $.ajax({
+                    url: "{{ route('admin.modificar_empresa') }}",
+                    type: "POST",
+                    data: formData,
+                    dataType: "json",
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).done(function(res) {
+                    //$('#carga').hide();
+                    Swal.close();
+                    //alert(res.success); // Mostrar el mensaje de éxito en un alert
+                    Swal.fire({
+                        icon: 'success', // Cambiado a 'success' para mostrar un mensaje positivo
+                        title: 'Éxito',
+                        text: res.success,
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                    //location.reload(); // Recargar la página
+                    window.location.href = window.location.href.split('?')[0] + '?noCache=' + new Date().getTime();
+                }).fail(function(res) {
+                    let errorMessage = 'Ocurrió un error inesperado.';
+
+                    // Verifica si la respuesta contiene JSON válido y el campo "error"
+                    if (res.responseJSON && res.responseJSON.error) {
+                        errorMessage = res.responseJSON.error; // Solo el mensaje de error
+                    } else if (res.responseText) {
+                        try {
+                            const response = JSON.parse(res.responseText);
+                            errorMessage = response.error ||
+                                errorMessage; // Si existe, muestra el campo "error"
+                        } catch (e) {
+                            errorMessage = res.responseText; // Texto plano de la respuesta
+                        }
+                    }
+
+                    // Muestra el mensaje de error en SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: errorMessage,
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false
+                    });
+                });
+
+                Swal.close();
+                $('#ModalModificarCamara').modal('hide'); // Cerrar el modal después de guardar
+
+                });
         });
+
     </script>
 @endsection

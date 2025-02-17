@@ -19,9 +19,9 @@ class Empresa extends Model
         'id_tipo_contribuyente',
         'direccion',
         'telefono',
-        'email_administrativo',
+        'correo_administrativo',
         'contribuyente_especial',
-        'email_comprobante_electronico',
+        'correo_comprobante_electronico',
         'id_ambiente',
         'clave_firma',
     ];
