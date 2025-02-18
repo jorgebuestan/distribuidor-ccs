@@ -58,6 +58,91 @@
 		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/dropzone/basic.css') }}" />
 		<link rel="stylesheet" href="{{ URL::asset('porto/vendor/dropzone/dropzone.css') }}" />
 
+
+		<style>
+        .dashed-line {
+            border-left: 1px dashed #000;
+            border-right: 1px dashed #000;
+        }
+
+        .dashed-line-left {
+            border-left: 1px dashed #000;
+        }
+
+        .m-btn {
+            background-color: #264025;
+            /* Cambia el color de fondo */
+            color: white;
+            /* Cambia el color del texto */
+        }
+
+        .r-btn {
+            background-color: #4C804A;
+            /* Cambia el color de fondo */
+            color: white;
+            /* Cambia el color del texto */
+        }
+
+        .b-btn {
+            background-color: #73C070;
+            /* Cambia el color de fondo */
+            color: white;
+            /* Cambia el color del texto */
+        }
+
+        .mb-btn {
+            background-color: #79CC76;
+            /* Cambia el color de fondo */
+            color: white;
+            /* Cambia el color del texto */
+        }
+
+        .content-header {
+            background: linear-gradient(to right, #0399E3, #42AFA2, #73C070);
+            /* jbuestan */
+            box-shadow: 1px 3px 0 1px #CCCCCC;
+        }
+    </style>
+
+<style>
+  #dataTable tbody tr {
+    height: 30px !important;  /* Establece una altura fija más pequeña */
+  }
+
+  #dataTable tbody td {
+    padding: 5px 8px; /* Ajusta el relleno */
+    font-size: 12px; /* Tamaño de la letra */
+    vertical-align: middle; /* Centra el contenido verticalmente */
+    line-height: 1.2; /* Altura de línea controlada */
+  }
+
+  #dataTable thead th {
+    padding: 5px 8px; /* Ajusta el relleno de los encabezados */
+    font-size: 10px; /* Tamaño de la letra */
+    vertical-align: middle; /* Centra verticalmente el texto */
+    line-height: 1.2; /* Altura de línea controlada */
+  }
+</style>
+
+<style>
+  .d-flex {
+    align-items: center !important; /* Asegura que los elementos estén centrados verticalmente */
+  }
+
+  .btn {
+    margin: 0 !important; /* Remueve márgenes que puedan causar desplazamientos */
+    line-height: 1 !important; /* Ajusta la altura de línea */
+    display: flex; /* Asegura que el contenido del botón esté centrado */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-sm {
+    height: auto !important; /* Asegura que no haya alturas fijas que desalineen */
+    padding: 5px 10px !important; /* Aplica un relleno uniforme */
+  }
+</style>
+
 	</head>
 	<body>
 		<section class="body">
