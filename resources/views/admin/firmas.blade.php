@@ -124,7 +124,17 @@
                                             data-target="#ModalFirma">Agregar Nuevo Registro</button> 
                                     </div>
                                 </div>
-                            </div> 
+                            </div>  
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-end">
+                                        <button class="btn btn-default" id="btnExportCSV" title="Descargar CSV"><i class="fa-solid fa-file-csv"></i></button>&nbsp;
+                                        <button class="btn btn-default" id="btnExportExcel" title="Descargar Excel"><i class="fa-regular fa-file-excel"></i></button>&nbsp;
+                                        <button class="btn btn-default" id="btnExportPDF" title="Descargar PDF"><i class="fa-regular fa-file-pdf"></i></button>&nbsp;
+                                        <button class="btn btn-default" id="btnImprimir" title="Imprimir"><i class="fa-solid fa-print"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 &nbsp;
                             </div>
@@ -1968,6 +1978,34 @@
 
                 Swal.close();
                 $('#ModalFirma').modal('show');
+            });
+
+            $('#btnExportCSV').on('click', function() { 
+
+            var url = "{{ route('admin.exportar_csv_firmas') }}";
+
+            window.location.href = url;
+            });
+
+            $('#btnExportExcel').on('click', function() { 
+
+                var url = "{{ route('admin.exportar_excel_firmas') }}";
+
+                window.location.href = url;
+            });
+
+            $('#btnExportPDF').on('click', function() {  
+                // Construir la URL con el parámetro
+                var url = "{{ route('admin.exportar_pdf_firmas') }}";   
+                // Redireccionar a la URL
+                window.location.href = url;
+            });
+
+            $('#btnImprimir').on('click', function() {  
+                // Construir la URL con el parámetro
+                var url = "{{ route('admin.imprimir_pdf_firmas') }}";   
+                // Abrir la URL en una nueva ventana o pestaña
+                window.open(url, '_blank');
             });
 
 
