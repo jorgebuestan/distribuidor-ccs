@@ -139,15 +139,29 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <!-- <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#ModalEstablecimiento">Agregar Nuevo Registro</button> -->
-                                        <!-- <button id="abrirModal" class="btn btn-primary mb-3">Agregar Nuevo Socio</button>-->
+                                    <div class="col-md-12 d-flex justify-content-end">
+                                    <button class="btn btn-default btn-lg" id="btnExportCSV" title="Descargar CSV">
+                                        <i class="fa-solid fa-file-csv fa-2x"></i>
+                                    </button> &nbsp;
+                                    <button class="btn btn-default btn-lg" id="btnExportExcel" title="Descargar Excel">
+                                        <i class="fa-regular fa-file-excel fa-2x"></i>
+                                    </button> &nbsp;
+                                    <button class="btn btn-default btn-lg" id="btnExportPDF" title="Descargar PDF">
+                                        <i class="fa-regular fa-file-pdf fa-2x"></i>
+                                    </button> &nbsp;
+                                    <button class="btn btn-default btn-lg" id="btnImprimir" title="Imprimir">
+                                        <i class="fa-solid fa-print fa-2x"></i>
+                                    </button> 
+                                   
+                                        <!-- <button class="btn btn-default" id="btnExportExcel" title="Descargar Excel"><i class="fa-regular fa-file-excel"></i></button>&nbsp;
+                                        <button class="btn btn-default" id="btnExportPDF" title="Descargar PDF"><i class="fa-regular fa-file-pdf"></i></button>&nbsp;
+                                        <button class="btn btn-default" id="btnImprimir" title="Imprimir"><i class="fa-solid fa-print"></i></button> -->
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-6">
                                 &nbsp;
                             </div>
                         </div>
@@ -793,6 +807,30 @@
                 if (shouldCloseModal){
                     $('#ModalEmpresa').modal('hide'); // Cerrar el modal después de guardar
                 }
+            });
+
+            $('#btnExportCSV').on('click', function() { 
+                var url = "{{ route('admin.exportar_csv_empresas') }}";
+                window.location.href = url;
+            });
+
+            $('#btnExportExcel').on('click', function() { 
+                var url = "{{ route('admin.exportar_excel_empresas') }}";
+                window.location.href = url;
+            });
+
+            $('#btnExportPDF').on('click', function() {  
+                // Construir la URL con el parámetro
+                var url = "{{ route('admin.exportar_pdf_empresas') }}";   
+                // Redireccionar a la URL
+                window.location.href = url;
+            });
+
+            $('#btnImprimir').on('click', function() {  
+                // Construir la URL con el parámetro
+                var url = "{{ route('admin.imprimir_pdf_empresas') }}";   
+                // Abrir la URL en una nueva ventana o pestaña
+                window.open(url, '_blank');
             });
 
                 // Mostrar el nombre del archivo seleccionado para el logo
