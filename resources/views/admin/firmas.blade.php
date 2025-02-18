@@ -743,14 +743,14 @@
                 pageLength: 10,
                 columns: [
                 { data: 'id', width: '3%' },
-                { data: 'tipo_solicitud', width: '5%' },
+                { data: 'tipo_solicitud', width: '20%' },
                 { data: 'tipo_documento', width: '5%' },
                 { data: 'numero_documento', width: '10%' },
                 { data: 'nombres', width: '15%' }, 
                 { data: 'apellido_paterno', width: '15%' }, 
                 { data: 'apellido_materno', width: '15%' }, 
-                { data: 'celular', width: '15%' }, 
-                { data: 'email', width: '15%' }, 
+                { data: 'celular', width: '10%' }, 
+                { data: 'email', width: '10%' }, 
                 ],
                 order: [[0, "asc"]],
                 createdRow: function(row, data, dataIndex) {
