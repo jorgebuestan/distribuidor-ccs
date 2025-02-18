@@ -137,19 +137,19 @@
 
 				                <ul class="nav nav-main">
 				                    <li>
-				                        <a class="nav-link" href="/dashboard">
+				                        <a class="nav-link" href="{{ route('dashboard') }}">
 				                            <i class="bx bx-home-alt" aria-hidden="true"></i>
 				                            <span>Menú Principal</span>
 				                        </a>                        
 				                    </li>
 									<li>
-				                        <a class="nav-link" href="/administrador/empresas">
+				                        <a class="nav-link" href="{{ route('empresas.index') }}">
 											<i class="bx bx-detail" aria-hidden="true"></i>
 				                            <span>Registro de Empresas</span>
 				                        </a>                        
 				                    </li>
 									<li>
-				                        <a class="nav-link" href="/administrador/firmas">
+				                        <a class="nav-link" href="{{ route('firmas.index') }}">
 											<i class="bx bx-loader-circle" aria-hidden="true"></i>
 				                            <span>Generar Firmas</span>
 				                        </a>                        
