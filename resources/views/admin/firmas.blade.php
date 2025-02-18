@@ -128,10 +128,22 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-12 d-flex justify-content-end">
-                                        <button class="btn btn-default" id="btnExportCSV" title="Descargar CSV"><i class="fa-solid fa-file-csv"></i></button>&nbsp;
-                                        <button class="btn btn-default" id="btnExportExcel" title="Descargar Excel"><i class="fa-regular fa-file-excel"></i></button>&nbsp;
+                                    <button class="btn btn-default btn-lg" id="btnExportCSV" title="Descargar CSV">
+                                        <i class="fa-solid fa-file-csv fa-2x"></i>
+                                    </button> &nbsp;
+                                    <button class="btn btn-default btn-lg" id="btnExportExcel" title="Descargar Excel">
+                                        <i class="fa-regular fa-file-excel fa-2x"></i>
+                                    </button> &nbsp;
+                                    <button class="btn btn-default btn-lg" id="btnExportPDF" title="Descargar PDF">
+                                        <i class="fa-regular fa-file-pdf fa-2x"></i>
+                                    </button> &nbsp;
+                                    <button class="btn btn-default btn-lg" id="btnImprimir" title="Imprimir">
+                                        <i class="fa-solid fa-print fa-2x"></i>
+                                    </button> 
+                                   
+                                        <!-- <button class="btn btn-default" id="btnExportExcel" title="Descargar Excel"><i class="fa-regular fa-file-excel"></i></button>&nbsp;
                                         <button class="btn btn-default" id="btnExportPDF" title="Descargar PDF"><i class="fa-regular fa-file-pdf"></i></button>&nbsp;
-                                        <button class="btn btn-default" id="btnImprimir" title="Imprimir"><i class="fa-solid fa-print"></i></button>
+                                        <button class="btn btn-default" id="btnImprimir" title="Imprimir"><i class="fa-solid fa-print"></i></button> -->
                                     </div>
                                 </div>
                             </div>
