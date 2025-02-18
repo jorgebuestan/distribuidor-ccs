@@ -1,7 +1,7 @@
 @extends('dashboard')
 
 @section('pagename')
-    Maestro de Cámaras
+    Resitro de Firmas
 @endsection
 
 @section('content')
@@ -113,7 +113,7 @@
             <div class="col-lg-12">
                 <section class="card" id="w3">
                     <header class="card-header">
-                        <h2 class="card-title">Registro de Empresas</h2>
+                        <h2 class="card-title">Registro de Firmas</h2>
                     </header>
                     <div class="card-body">
                         <div class="row">
@@ -124,7 +124,29 @@
                                             data-target="#ModalFirma">Agregar Nuevo Registro</button> 
                                     </div>
                                 </div>
-                            </div> 
+                            </div>  
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-end">
+                                    <button class="btn btn-default btn-lg" id="btnExportCSV" title="Descargar CSV">
+                                        <i class="fa-solid fa-file-csv fa-2x"></i>
+                                    </button> &nbsp;
+                                    <button class="btn btn-default btn-lg" id="btnExportExcel" title="Descargar Excel">
+                                        <i class="fa-regular fa-file-excel fa-2x"></i>
+                                    </button> &nbsp;
+                                    <button class="btn btn-default btn-lg" id="btnExportPDF" title="Descargar PDF">
+                                        <i class="fa-regular fa-file-pdf fa-2x"></i>
+                                    </button> &nbsp;
+                                    <button class="btn btn-default btn-lg" id="btnImprimir" title="Imprimir">
+                                        <i class="fa-solid fa-print fa-2x"></i>
+                                    </button> 
+                                   
+                                        <!-- <button class="btn btn-default" id="btnExportExcel" title="Descargar Excel"><i class="fa-regular fa-file-excel"></i></button>&nbsp;
+                                        <button class="btn btn-default" id="btnExportPDF" title="Descargar PDF"><i class="fa-regular fa-file-pdf"></i></button>&nbsp;
+                                        <button class="btn btn-default" id="btnImprimir" title="Imprimir"><i class="fa-solid fa-print"></i></button> -->
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 &nbsp;
                             </div>
@@ -743,14 +765,14 @@
                 pageLength: 10,
                 columns: [
                 { data: 'id', width: '3%' },
-                { data: 'tipo_solicitud', width: '5%' },
+                { data: 'tipo_solicitud', width: '20%' },
                 { data: 'tipo_documento', width: '5%' },
                 { data: 'numero_documento', width: '10%' },
                 { data: 'nombres', width: '15%' }, 
                 { data: 'apellido_paterno', width: '15%' }, 
                 { data: 'apellido_materno', width: '15%' }, 
-                { data: 'celular', width: '15%' }, 
-                { data: 'email', width: '15%' }, 
+                { data: 'celular', width: '10%' }, 
+                { data: 'email', width: '10%' }, 
                 ],
                 order: [[0, "asc"]],
                 createdRow: function(row, data, dataIndex) {
@@ -1027,147 +1049,95 @@
                     $("#error-email").show(); // Mostrar error
                 }
             });
+
+            $('#celular').on('input', function() {
+                let value = $(this).val();
+                // Eliminar todos los caracteres no numéricos excepto el guion
+                value = value.replace(/[^0-9]/g, '');
+                
+                // Limitar el campo a un máximo de 11 caracteres (10 dígitos + 1 guion)
+                if (value.length > 19) {
+                    value = value.slice(0, 19);
+                }
+                $(this).val(value);
+            });
  
 
             //Manejo de Upercase 
-            $('#razon_social').on('input', function() {
+            $('#numero_documento').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#nombres_representante_legal').on('input', function() {
+            $('#codigo_dactilar').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#apellidos_representante_legal').on('input', function() {
+            $('#nombres').on('input', function() {
+                // Convierte el valor del campo a mayúsculas
+                $(this).val($(this).val().toUpperCase());
+            });  
+
+            $('#apellido_paterno').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            /*$('#telefono_representante_legal').on('input', function() {
-                // Convierte el valor del campo a mayúsculas
-                $(this).val($(this).val().toUpperCase());
-            });*/
-
-            $('#telefono_representante_legal').on('input', function() {
-                let value = $(this).val();
-                // Eliminar todos los caracteres no numéricos excepto el guion
-                value = value.replace(/[^0-9]/g, '');
-                
-                // Limitar el campo a un máximo de 11 caracteres (10 dígitos + 1 guion)
-                if (value.length > 11) {
-                    value = value.slice(0, 11);
-                }
-                $(this).val(value);
-            });
-
-            $('#cargo_representante_legal').on('input', function() {
+            $('#apellido_materno').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#direccion_representante_legal').on('input', function() {
+            $('#razon_social_empresa').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#calle').on('input', function() {
+            $('#cargo_representante').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#manzana').on('input', function() {
+            $('#razon_social_empresa_miembro').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#numero').on('input', function() {
+            $('#area_miembro').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#interseccion').on('input', function() {
+            $('#motivo_miembro').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#referencia').on('input', function() {
+            $('#cargo_solicitante_miembro').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#razon_social_mod').on('input', function() {
+            $('#nombres_empresa').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#nombres_representante_legal_mod').on('input', function() {
+            $('#apellido_paterno_empresa').on('input', function() {
+                // Convierte el valor del campo a mayúsculas
+                $(this).val($(this).val().toUpperCase());
+            });  
+
+            $('#apellido_materno_empresa').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
             });
 
-            $('#apellidos_representante_legal_mod').on('input', function() {
+            $('#direccion_empresa').on('input', function() {
                 // Convierte el valor del campo a mayúsculas
                 $(this).val($(this).val().toUpperCase());
-            });
-
-            /*$('#telefono_representante_legal_mod').on('input', function() {
-                // Convierte el valor del campo a mayúsculas
-                $(this).val($(this).val().toUpperCase());
-            });*/
-
-            $('#telefono_representante_legal_mod').on('input', function() {
-                let value = $(this).val();
-                // Eliminar todos los caracteres no numéricos excepto el guion
-                value = value.replace(/[^0-9]/g, '');
-                
-                // Limitar el campo a un máximo de 11 caracteres (10 dígitos + 1 guion)
-                if (value.length > 11) {
-                    value = value.slice(0, 11);
-                }
-                $(this).val(value);
-            });
-
-            $('#cargo_representante_legal_mod').on('input', function() {
-                // Convierte el valor del campo a mayúsculas
-                $(this).val($(this).val().toUpperCase());
-            });
-
-            $('#direccion_representante_legal_mod').on('input', function() {
-                // Convierte el valor del campo a mayúsculas
-                $(this).val($(this).val().toUpperCase());
-            });
-
-            $('#calle_mod').on('input', function() {
-                // Convierte el valor del campo a mayúsculas
-                $(this).val($(this).val().toUpperCase());
-            });
-
-            $('#manzana_mod').on('input', function() {
-                // Convierte el valor del campo a mayúsculas
-                $(this).val($(this).val().toUpperCase());
-            });
-
-            $('#numero_mod').on('input', function() {
-                // Convierte el valor del campo a mayúsculas
-                $(this).val($(this).val().toUpperCase());
-            });
-
-            $('#interseccion_mod').on('input', function() {
-                // Convierte el valor del campo a mayúsculas
-                $(this).val($(this).val().toUpperCase());
-            });
-
-            $('#referencia_mod').on('input', function() {
-                // Convierte el valor del campo a mayúsculas
-                $(this).val($(this).val().toUpperCase());
-            });
-
-            // Evento para recargar el DataTable cuando cambia el valor del select de localidad
-            $('#localidad').on('change', function() {
-                table.ajax.reload();
-            });
+            }); 
  
             //jbuestan   
 
@@ -1871,6 +1841,7 @@
                     });
                     // Recargar la página para reflejar los cambios
                     window.location.href = window.location.href.split('?')[0] + '?noCache=' + new Date().getTime();
+                    //table.ajax.reload();
                 }).fail(function(res) { 
 
                     if (res.status === 422) {
@@ -1958,7 +1929,7 @@
 
                 if (paisId != -1 && provinciaId != -1) {
                     $.ajax({
-                        url: '/get-cantones', // Ruta para obtener los cantones
+                        url: '{{ route('funciones_generales.get_cantones') }}', // Ruta para obtener los cantones
                         method: 'GET',
                         data: {
                             id_pais: paisId, // Enviamos el ID del país
@@ -1996,6 +1967,59 @@
                         '<option value=-1>Seleccionar</option>'); // Limpiar select de parroquias
                 }
             }); 
+
+
+             // Delegar el evento de clic al documento para asegurar que funcione con elementos dinámicos
+             $(document).on('click', '.open-modal', function() {
+                console.log('Botón clicado...');
+                var button = $(this);
+                var camaraId = button.data('id');
+
+                console.log('Cargo ID:', camaraId);
+
+                //$('#carga').show();
+                Swal.fire({
+                    title: 'Cargando información de Cámara',
+                    text: 'Por favor espere',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                }); 
+
+                Swal.close();
+                $('#ModalFirma').modal('show');
+            });
+
+            $('#btnExportCSV').on('click', function() { 
+
+            var url = "{{ route('admin.exportar_csv_firmas') }}";
+
+            window.location.href = url;
+            });
+
+            $('#btnExportExcel').on('click', function() { 
+
+                var url = "{{ route('admin.exportar_excel_firmas') }}";
+
+                window.location.href = url;
+            });
+
+            $('#btnExportPDF').on('click', function() {  
+                // Construir la URL con el parámetro
+                var url = "{{ route('admin.exportar_pdf_firmas') }}";   
+                // Redireccionar a la URL
+                window.location.href = url;
+            });
+
+            $('#btnImprimir').on('click', function() {  
+                // Construir la URL con el parámetro
+                var url = "{{ route('admin.imprimir_pdf_firmas') }}";   
+                // Abrir la URL en una nueva ventana o pestaña
+                window.open(url, '_blank');
+            });
+
 
     });
 </script>

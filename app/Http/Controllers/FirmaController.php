@@ -115,6 +115,7 @@ class FirmaController extends Controller
                 'apellido_materno' => $firma->apellido_materno, 
                 'celular' =>  $firma->celular,
                 'email' =>  $firma->email,  
+                'btn' => '<button class="btn btn-outline-warning mb-3 btn-sm rounded-pill open-modal" data-id="' . $firma->id . '"><i class="fa-solid fa-pencil"></i>&nbsp;Modificar</button>'
             ];
         });
 
