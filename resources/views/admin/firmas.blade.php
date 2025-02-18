@@ -1,7 +1,7 @@
 @extends('dashboard')
 
 @section('pagename')
-    Maestro de Cámaras
+    Resitro de Firmas
 @endsection
 
 @section('content')
@@ -113,7 +113,7 @@
             <div class="col-lg-12">
                 <section class="card" id="w3">
                     <header class="card-header">
-                        <h2 class="card-title">Registro de Empresas</h2>
+                        <h2 class="card-title">Registro de Firmas</h2>
                     </header>
                     <div class="card-body">
                         <div class="row">
@@ -1026,6 +1026,18 @@
                 } else {
                     $("#error-email").show(); // Mostrar error
                 }
+            });
+
+            $('#celular').on('input', function() {
+                let value = $(this).val();
+                // Eliminar todos los caracteres no numéricos excepto el guion
+                value = value.replace(/[^0-9]/g, '');
+                
+                // Limitar el campo a un máximo de 11 caracteres (10 dígitos + 1 guion)
+                if (value.length > 19) {
+                    value = value.slice(0, 19);
+                }
+                $(this).val(value);
             });
  
 
