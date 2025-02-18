@@ -349,7 +349,7 @@
                                                 <div class="row mb-2">
                                                     <div class="col-md-12">
                                                         <label>Firma Electrónica</label>
-                                                        <div id="dragDropBox" class = "border p-4 text center">
+                                                        <div id="dragDropBox" class="border p-4 text-center">
                                                             <p>Arrastra y suelta tu firma aquí o haz clic para seleccionar un archivo.</p>
                                                             <input type="file" class="d-none" id="firmaFile" name="firmaFile">
                                                             <span id="firmaFileName" class="text-muted"></span>
@@ -357,46 +357,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <script>
-                                                    const dragDropBox = document.getElementById('dragDropBox');
-                                                    const fileInput = document.getElementById('firmaFile');
-                                                
-                                                    dragDropBox.addEventListener('click', function() {
-                                                        fileInput.click();
-                                                    });
-                                                
-                                                    dragDropBox.addEventListener('dragover', function(e) {
-                                                        e.preventDefault();
-                                                        dragDropBox.style.backgroundColor = '#f0f0f0'; // Cambio de color al arrastrar
-                                                    });
-                                                
-                                                    dragDropBox.addEventListener('dragleave', function() {
-                                                        dragDropBox.style.backgroundColor = ''; // Vuelve al color original
-                                                    });
-                                                
-                                                    dragDropBox.addEventListener('drop', function(e) {
-                                                        e.preventDefault();
-                                                        dragDropBox.style.backgroundColor = ''; // Vuelve al color original
-                                                        const files = e.dataTransfer.files;
-                                                        if (files.length > 0) {
-                                                            fileInput.files = files; // Asigna los archivos seleccionados al input
-                                                        }
-                                                    });
-
-                                                    // Mostrar el nombre del archivo seleccionado para el logo
-                                                    document.getElementById('logoFile').addEventListener('change', function() {
-                                                        const fileName = this.files[0].name;
-                                                        document.getElementById('logoFileName').textContent = fileName;
-                                                    });
-
-                                                    // Mostrar el nombre del archivo seleccionado para la firma
-                                                    document.getElementById('firmaFile').addEventListener('change', function() {
-                                                        const fileName = this.files[0].name;
-                                                        document.getElementById('firmaFileName').textContent = fileName;
-                                                    });
-
-                                                </script>
                                             </div>
                                         </div>
                                     </div>
@@ -833,7 +793,11 @@
                 window.open(url, '_blank');
             });
 
-                // Mostrar el nombre del archivo seleccionado para el logo
+            $('#btn-cerrar-formulario').on('click', function(){
+                $('#ModalEmpresa').modal('hide');
+            });
+
+            // Mostrar el nombre del archivo seleccionado para el logo
             document.getElementById('logoFile').addEventListener('change', function() {
                 const fileName = this.files[0].name;
                 document.getElementById('logoFileName').textContent = fileName;
@@ -876,6 +840,45 @@
 
     <script>
         async function validarFormulario() {
+            // Validación del archivo de logo
+            let logoFileInput = $('#logoFile')[0]; // Acceder al elemento DOM directamente
+            let logoFile = logoFileInput.files[0]; // Obtener el archivo seleccionado
+
+            // Expresión regular para validar extensiones de imágenes
+            let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.webp)$/i;
+
+            if (!logoFile) {
+                await Swal.fire({
+                    target: document.getElementById('ModalEmpresa'),
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Debe seleccionar un archivo para el logo.',
+                    confirmButtonText: 'Aceptar',
+                    allowOutsideClick: false
+                });
+                return false;
+            }
+
+            // Obtener el nombre del archivo de logo
+            let logoFileName = logoFile.name;
+
+            // Validar la extensión del archivo de logo
+            if (!allowedExtensions.exec(logoFileName)) {
+                await Swal.fire({
+                    target: document.getElementById('ModalEmpresa'),
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Formato de archivo no permitido para el logo. Solo se aceptan imágenes (JPG, JPEG, PNG, GIF, BMP, WEBP).',
+                    confirmButtonText: 'Aceptar',
+                    allowOutsideClick: false
+                });
+
+                // Limpiar el campo de archivo si no es válido
+                $('#logoFile').val('');
+                return false;
+            }
+
+            // Validación del RUC
             if (!/^\d{13}$/.test($('#ruc').val())) {
                 $("#error-ruc").show();
                 await Swal.fire({
@@ -891,6 +894,7 @@
                 return false;
             }
 
+            // Validación de la Razón Social
             if ($('#razon_social').val() == "") {
                 await Swal.fire({
                     target: document.getElementById('ModalEmpresa'),
@@ -905,6 +909,7 @@
                 return false;
             }
 
+            // Validación del Tipo de Contribuyente
             if ($('#id_tipo_contribuyente').val() == -1) {
                 await Swal.fire({
                     target: document.getElementById('ModalEmpresa'),
@@ -919,6 +924,7 @@
                 return false;
             }
 
+            // Validación de la Dirección
             if ($('#direccion').val() == "") {
                 await Swal.fire({
                     target: document.getElementById('ModalEmpresa'),
@@ -933,6 +939,7 @@
                 return false;
             }
 
+            // Validación del Teléfono
             if ($('#telefono').val() == "") {
                 await Swal.fire({
                     target: document.getElementById('ModalEmpresa'),
@@ -947,6 +954,7 @@
                 return false;
             }
 
+            // Validación del Correo Administrativo
             if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($('#correo_administrativo').val())) {
                 $("#error-correo-administrativo").show();
                 await Swal.fire({
@@ -962,6 +970,7 @@
                 return false;
             }
 
+            // Validación del Correo de Comprobante Electrónico
             if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test($('#correo_comprobante_electronico').val())) {
                 $("#error-correo-comprobante-electronico").show();
                 await Swal.fire({
@@ -977,6 +986,7 @@
                 return false;
             }
 
+            // Validación del Tipo de Ambiente
             if ($('#id_ambiente').val() == -1) {
                 await Swal.fire({
                     target: document.getElementById('ModalEmpresa'),
@@ -991,6 +1001,7 @@
                 return false;
             }
 
+            // Validación de la Clave de Firma Electrónica
             if ($('#clave_firma').val() == "") {
                 await Swal.fire({
                     target: document.getElementById('ModalEmpresa'),
@@ -1005,6 +1016,42 @@
                 return false;
             }
 
+            // Validación del archivo de firma
+            let fileInput = $('#firmaFile')[0]; // Acceder al elemento DOM directamente
+            let file = fileInput.files[0]; // Obtener el archivo seleccionado
+
+            if (!file) {
+                await Swal.fire({
+                    target: document.getElementById('ModalEmpresa'),
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Debe seleccionar un archivo para la firma.',
+                    confirmButtonText: 'Aceptar',
+                    allowOutsideClick: false
+                });
+                return false;
+            }
+
+            // Obtener el nombre del archivo de firma
+            let fileName = file.name;
+
+            // Validar la extensión del archivo de firma
+            if (!allowedExtensions.exec(fileName)) {
+                await Swal.fire({
+                    target: document.getElementById('ModalEmpresa'),
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Formato de archivo no permitido para la firma. Solo se aceptan imágenes (JPG, JPEG, PNG, GIF, BMP, WEBP).',
+                    confirmButtonText: 'Aceptar',
+                    allowOutsideClick: false
+                });
+
+                // Limpiar el campo de archivo si no es válido
+                $('#firmaFile').val('');
+                return false;
+            }
+
+            // Si todo está correcto, retornar true
             return true;
         }
     </script>
@@ -1022,6 +1069,5 @@
             $('#firmaFileName').text(''); // Limpiar el nombre del archivo de la firma
         }
     </script>
-
 
 @endsection
