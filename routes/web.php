@@ -54,6 +54,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/administrador/reportes/exportar_csv_firmas', [ReportesController::class, 'exportar_csv_firmas'])->middleware('auth')->name('admin.exportar_csv_firmas');
     Route::get('/administrador/reportes/imprimir_pdf_firmas', [ReportesController::class, 'imprimir_pdf_firmas'])->middleware('auth')->name('admin.imprimir_pdf_firmas');
 
+    Route::get('/administrador/reportes/exportar_pdf_empresas', [ReportesController::class, 'exportar_pdf_empresas'])->middleware('auth')->name('admin.exportar_pdf_empresas');
+    Route::get('/administrador/reportes/exportar_excel_empresas', [ReportesController::class, 'exportar_excel_empresas'])->middleware('auth')->name('admin.exportar_excel_empresas');
+    Route::get('/administrador/reportes/exportar_csv_empresas', [ReportesController::class, 'exportar_csv_empresas'])->middleware('auth')->name('admin.exportar_csv_empresas');
+    Route::get('/administrador/reportes/imprimir_pdf_empresas', [ReportesController::class, 'imprimir_pdf_empresas'])->middleware('auth')->name('admin.imprimir_pdf_empresas');
 });
 
 require __DIR__.'/auth.php';
