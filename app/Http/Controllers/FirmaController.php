@@ -128,7 +128,7 @@ class FirmaController extends Controller
         return response()->json($json_data);
     }
 
-    public function registrar_firma(Request $request)
+    public function registrar_firma (Request $request)
     {
         try {
             // Iniciar una transacción

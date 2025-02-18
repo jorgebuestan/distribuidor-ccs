@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
             $table->text('razon_social');
+            $table->boolean('obligado_contabilidad');
             $table->text('ruc');
             $table->integer('id_tipo_contribuyente');
             $table->text('direccion');
             $table->text('telefono');
-            $table->text('email_administrativo');
+            $table->text('correo_administrativo');
             $table->integer('contribuyente_especial');
-            $table->text('email_comprobante_electronico');
+            $table->text('correo_comprobante_electronico');
             $table->integer('id_ambiente');
             $table->text('firma');
             $table->text('clave_firma');
