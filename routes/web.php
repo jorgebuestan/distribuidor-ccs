@@ -44,7 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/administrador/empresas', [EmpresaController::class, 'index']) -> middleware('auth')->name('empresas.index');
     Route::get('/administrador/obtener_listado_empresas', [EmpresaController::class, 'obtener_listado_empresas'])->middleware('auth')->name('admin.obtener_listado_empresas');
     Route::post('/admiminstrador/registrar_empresa', [EmpresaController::class, 'registrar_empresa'])->middleware('auth')->name('admin.registrar_empresa');
-    Route::post('/administrrador/empresa/modificar_empresa', [EmpresaController::class, 'modificar_empresa'])->middleware('auth')->name('admin.modificar_empresa');
+    Route::get('/administrador/empresas/{id}', [EmpresaController::class, 'obtenerDatosEmpresa'])->middleware('auth')->name('admin.obtenerDatosEmpresa');
+    Route::post('/administrador/empresa/modificar_empresa', [EmpresaController::class, 'modificar_empresa'])->middleware('auth')->name('admin.modificar_empresa');
 });
 
 require __DIR__.'/auth.php';
