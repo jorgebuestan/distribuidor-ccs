@@ -118,7 +118,7 @@ class ReportesController extends Controller
 
        // Generar PDF usando una vista Blade con los datos filtrados firmas
        //$pdf = PDF::loadView('reportes.firmas', ['firmas' => $firmas]);
-       $pdf = PDF::loadView('reportes.firmas_imprimir', ['firmas' => $firmas])->setPaper('a4', 'landscape');
+       $pdf = PDF::loadView('reportes.firmas', ['firmas' => $firmas])->setPaper('a4', 'landscape');
        // Descargar el PDF
        return $pdf->stream('firmas.pdf');
     }
