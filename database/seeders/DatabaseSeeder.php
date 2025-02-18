@@ -25,10 +25,17 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoDocumentoSeeder::class); 
         $this->call(TipoSexoSeeder::class); 
         $this->call(TipoSolicitudSeeder::class); 
+<<<<<<< HEAD
         $this->call(TipoVigenciaSeeder::class);  
         $this->call(TipoAmbienteSeeder::class);
         $this->call(TipoContribuyenteSeeder::class); 
         $this->call(TipoArchivoSeeder::class);  
+=======
+        $this->call(TipoVigenciaSeeder::class); 
+        $this->call(TipoAmbienteSeeder::class);
+        $this->call(TipoContribuyenteSeeder::class);
+        $this->call(TipoArchivoSeeder::class); 
+>>>>>>> origin/jose
         //$this->call(UserSeeder::class);  
     }
 }
