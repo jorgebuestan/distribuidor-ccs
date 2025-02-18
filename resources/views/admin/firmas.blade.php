@@ -1970,7 +1970,7 @@
 
                 if (paisId != -1 && provinciaId != -1) {
                     $.ajax({
-                        url: '/get-cantones', // Ruta para obtener los cantones
+                        url: '{{ route('funciones_generales.get_cantones') }}', // Ruta para obtener los cantones
                         method: 'GET',
                         data: {
                             id_pais: paisId, // Enviamos el ID del país
