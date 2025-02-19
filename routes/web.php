@@ -19,7 +19,8 @@ use App\Http\Controllers\ReportesController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
