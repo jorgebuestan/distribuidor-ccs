@@ -29,6 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoAmbienteSeeder::class);
         $this->call(TipoContribuyenteSeeder::class); 
         $this->call(TipoArchivoSeeder::class);    
-        $this->call(UserSeeder::class);  
+        //$this->call(UserSeeder::class);  
     }
 }
