@@ -194,8 +194,8 @@ class EmpresaController extends Controller
                 'correo_comprobante_electronico' => 'required|email',
                 'id_ambiente' => 'required|integer',
                 'clave_firma' => 'required|string|max:255',
-                'logoFile' => 'nullable|file|mimes:jpg,jpeg,png',
-                'firmaFile' => 'nullable|file|mimes:jpg,jpeg,png',
+                'logoFile' => 'file|mimetypes:image/jpeg,image/png,image/gif,image/bmp,image/webp', // Validación de MIME types para el logo
+                'firmaFile' => 'file|mimetypes:image/jpeg,image/png,image/gif,image/bmp,image/webp', // Validación de MIME types para la firma
             ]);
 
             // Buscar la empresa a modificar
