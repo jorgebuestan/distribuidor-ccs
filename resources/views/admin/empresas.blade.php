@@ -1,7 +1,7 @@
 @extends('dashboard')
 
 @section('pagename')
-    Maestro de Empresas
+    Registro de Empresas
 @endsection
 
 @section('content')

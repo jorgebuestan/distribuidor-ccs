@@ -1,7 +1,7 @@
 @extends('dashboard')
 
 @section('pagename')
-    Resitro de Firmas
+    Registro de Firmas
 @endsection
 
 @section('content')
@@ -197,7 +197,7 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="ModalFirmaLabel"><b>Agregar una Nueva Cámara de Comercio</b></h5>
+                        <h5 class="modal-title" id="ModalFirmaLabel"><b>Agregar una Nueva Firma Electrónica</b></h5>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -271,7 +271,7 @@
                                                     </div> 
                                                     <div class="col-md-4 gap-1">
                                                         <div class="form-group">
-                                                            <label for="apellido_materno" class="form-label">Apedllido Materno</label>
+                                                            <label for="apellido_materno" class="form-label">Apellido Materno</label>
                                                             <input type="text" class="form-control" name="apellido_materno" id="apellido_materno" placeholder="Apellido Materno">
                                                         </div>
                                                     </div> 

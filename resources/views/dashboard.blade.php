@@ -240,7 +240,7 @@
 				                        </a>                        
 				                    </li>
 									<li>
-				                        <a class="nav-link" href="#">
+				                        <a class="nav-link" href="{{ route('reportes.index') }}">
 											<i class="bx bx-file" aria-hidden="true"></i>
 				                            <span>Reporte Firmas Electrónicas</span>
 				                        </a>                        
