@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 
-class FirmasExport implements FromCollection, WithHeadings, WithEvents, WithCustomCsvSettings
+class ReportesExport implements FromCollection, WithHeadings, WithEvents, WithCustomCsvSettings
 {
     protected $datos;
 
@@ -32,18 +32,15 @@ class FirmasExport implements FromCollection, WithHeadings, WithEvents, WithCust
     public function headings(): array
     {
         return [
-            'ID',
-            'Tipo de Solicitud',
-            'Tipo de Documento',
-            'Número de Documento',
-            'Nombres',
-            'Apellido Materno',
-            'Apellido Paterno',
-            'Celular',
-            'Email'
+            'Fecha de Emisión',
+            'Cliente',
+            'Tipo de Firma',
+            'Vigencia de Firma',
+            'Última Consulta',
+            'Observaciones',
         ];
-    } 
-    
+    }
+
     public function registerEvents(): array
     {
         return [
@@ -51,7 +48,7 @@ class FirmasExport implements FromCollection, WithHeadings, WithEvents, WithCust
                 $sheet = $event->sheet->getDelegate();
 
                 // Ajustar automáticamente el ancho de todas las columnas
-                foreach (range('A', 'I') as $column) { // Cambiado a 'I' para cubrir todas las columnas
+                foreach (range('A', 'F') as $column) {
                     $sheet->getColumnDimension($column)->setAutoSize(true);
                 }
 
